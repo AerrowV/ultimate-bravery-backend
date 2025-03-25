@@ -1,4 +1,4 @@
-.github# Start with Amazon Corretto 17 Alpine base image
+# Start with Amazon Corretto 17 Alpine base image
 FROM amazoncorretto:17-alpine
 
 # Install curl on Alpine
