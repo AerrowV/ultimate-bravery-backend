@@ -41,4 +41,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/SP2-UltimateBravery-api:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/sp2-ultimatebravery:latest
