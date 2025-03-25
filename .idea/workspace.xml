@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5d6322bd-7cb8-4811-8f5e-f5acf75604c7" name="Changes" comment="Reformatted code" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="devdev" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;AerrowV&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/AerrowV/SP2-UltimateBravery.git&quot;,
+    &quot;accountId&quot;: &quot;df1102a9-fdfc-4c30-a1da-e850f57b54ea&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2unicE25BW6Pdo0JeR99eYjcNMu" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/busin/Documents/F24_Sem3_Programming/SP2_&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\busin\Documents\F24_Sem3_Programming\SP2_" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\busin\Documents\F24_Sem3_Programming\SP2_" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.24978.46" />
+        <option value="bundled-js-predefined-d6986cc7102b-76f8388c3a79-JavaScript-IU-243.24978.46" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5d6322bd-7cb8-4811-8f5e-f5acf75604c7" name="Changes" comment="" />
+      <created>1742890817540</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1742890817540</updated>
+      <workItem from="1742890817540" duration="10216000" />
+      <workItem from="1742904372475" duration="438000" />
+      <workItem from="1742904822292" duration="24000" />
+      <workItem from="1742904864185" duration="829000" />
+      <workItem from="1742905725941" duration="122000" />
+      <workItem from="1742905860589" duration="9000" />
+    </task>
+    <task id="LOCAL-00001" summary="Updated StrategyDTO">
+      <option name="closed" value="true" />
+      <created>1742891082261</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1742891082261</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added dao classes">
+      <option name="closed" value="true" />
+      <created>1742894229168</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1742894229168</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Updated gitignore">
+      <option name="closed" value="true" />
+      <created>1742894310975</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1742894310975</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added methods to StrategyDAO">
+      <option name="closed" value="true" />
+      <created>1742897212682</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1742897212682</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added methods to GameDAO">
+      <option name="closed" value="true" />
+      <created>1742897615703</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1742897615704</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added DAO methods to gun and map">
+      <option name="closed" value="true" />
+      <created>1742897891080</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1742897891080</updated>
+    </task>
+    <task id="LOCAL-00007" summary="changed locations">
+      <option name="closed" value="true" />
+      <created>1742903863491</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1742903863491</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Added populator">
+      <option name="closed" value="true" />
+      <created>1742904339506</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1742904339506</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Added to GitHub">
+      <option name="closed" value="true" />
+      <created>1742904518873</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1742904518873</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Reformatted code">
+      <option name="closed" value="true" />
+      <created>1742904604686</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1742904604686</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
+    <MESSAGE value="Updated StrategyDTO" />
+    <MESSAGE value="Added dao classes" />
+    <MESSAGE value="Updated gitignore" />
+    <MESSAGE value="Added methods to StrategyDAO" />
+    <MESSAGE value="Added methods to GameDAO" />
+    <MESSAGE value="Added DAO methods to gun and map" />
+    <MESSAGE value="changed locations" />
+    <MESSAGE value="Added populator" />
+    <MESSAGE value="Added to GitHub" />
+    <MESSAGE value="Reformatted code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Reformatted code" />
+  </component>
+</project>
