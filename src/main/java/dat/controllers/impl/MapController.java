@@ -5,6 +5,7 @@ import dat.controllers.IController;
 import dat.dao.impl.GameDAO;
 import dat.dao.impl.MapDAO;
 import dat.dao.impl.StrategyDAO;
+import dat.services.mappers.MapMapper;
 import dat.dtos.MapDTO;
 import dat.entities.Game;
 import dat.entities.Map;
@@ -39,7 +40,7 @@ public class MapController implements IController<MapDTO, Long> {
 
         Map map = mapDao.read(id);
         if (map != null) {
-            ctx.status(200).json(convertToDTO(map));
+            ctx.status(200).json(MapMapper.toDTO(map));
         } else {
             ctx.status(404);
         }
@@ -48,16 +49,16 @@ public class MapController implements IController<MapDTO, Long> {
     @Override
     public void readAll(Context ctx) {
         ctx.status(200).json(mapDao.readAll().stream()
-                .map(this::convertToDTO)
+                .map(MapMapper::toDTO)
                 .toList());
     }
 
     @Override
     public void create(Context ctx) {
         MapDTO mapDTO = validateEntity(ctx);
-        Map map = convertToEntity(mapDTO);
+        Map map = MapMapper.toEntity(mapDTO);
         Map createdMap = mapDao.create(map);
-        ctx.status(201).json(convertToDTO(createdMap));
+        ctx.status(201).json(MapMapper.toDTO(createdMap));
     }
 
     @Override
@@ -78,7 +79,7 @@ public class MapController implements IController<MapDTO, Long> {
         updateRelationships(existing, mapDTO);
 
         Map updatedMap = mapDao.update(id, existing);
-        ctx.status(200).json(convertToDTO(updatedMap));
+        ctx.status(200).json(MapMapper.toDTO(updatedMap));
     }
 
     @Override
@@ -111,47 +112,12 @@ public class MapController implements IController<MapDTO, Long> {
 
         Map map = mapDao.readWithStrategies(id);
         if (map != null) {
-            ctx.status(200).json(convertToDTO(map));
+            ctx.status(200).json(MapMapper.toDTO(map));
         } else {
             ctx.status(404);
         }
     }
 
-    private MapDTO convertToDTO(Map map) {
-        return new MapDTO(
-                map.getId(),
-                map.getName(),
-                map.getGame() != null ? map.getGame().getId() : null,
-                map.getStrategies() != null ?
-                        map.getStrategies().stream().map(Strategy::getId).collect(Collectors.toList()) :
-                        List.of()
-        );
-    }
-
-    private Map convertToEntity(MapDTO dto) {
-        Map map = new Map();
-        map.setName(dto.getName());
-
-        try (EntityManager em = emf.createEntityManager()) {
-            em.getTransaction().begin();
-
-            Game game = em.find(Game.class, dto.getGameId());
-            map.setGame(game);
-
-            if (!dto.getStrategyIds().isEmpty()) {
-                Set<Strategy> strategies = em.createQuery(
-                                "SELECT s FROM Strategy s WHERE s.id IN :ids", Strategy.class)
-                        .setParameter("ids", dto.getStrategyIds())
-                        .getResultStream()
-                        .collect(Collectors.toSet());
-                map.setStrategies(strategies);
-            }
-
-            em.getTransaction().commit();
-        }
-
-        return map;
-    }
 
     private void updateRelationships(Map map, MapDTO dto) {
         try (EntityManager em = emf.createEntityManager()) {

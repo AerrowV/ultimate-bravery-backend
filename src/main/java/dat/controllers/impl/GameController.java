@@ -7,6 +7,7 @@ import dat.dtos.GameDTO;
 import dat.entities.Game;
 import dat.entities.Gun;
 import dat.entities.Map;
+import dat.services.mappers.GameMapper;
 import io.javalin.http.Context;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -33,7 +34,7 @@ public class GameController implements IController<GameDTO, Long> {
                 .get();
         Game game = dao.read(id);
         if (game != null) {
-            ctx.status(200).json(convertToDTO(game));
+            ctx.status(200).json(GameMapper.toDTO(game));
         } else {
             ctx.status(404);
         }
@@ -43,7 +44,7 @@ public class GameController implements IController<GameDTO, Long> {
     public void readAll(Context ctx) {
         List<Game> games = dao.readAll();
         List<GameDTO> gameDTOs = games.stream()
-                .map(this::convertToDTO)
+                .map(GameMapper::toDTO)
                 .collect(Collectors.toList());
         ctx.status(200).json(gameDTOs);
     }
@@ -51,9 +52,9 @@ public class GameController implements IController<GameDTO, Long> {
     @Override
     public void create(Context ctx) {
         GameDTO gameDTO = validateEntity(ctx);
-        Game game = convertToEntity(gameDTO);
+        Game game = GameMapper.toEntity(gameDTO);
         Game createdGame = dao.create(game);
-        ctx.status(201).json(convertToDTO(createdGame));
+        ctx.status(201).json(GameMapper.toDTO(createdGame));
     }
 
     @Override
@@ -70,7 +71,7 @@ public class GameController implements IController<GameDTO, Long> {
         existing.setName(gameDTO.getName());
         updateRelationships(existing, gameDTO);
         Game updatedGame = dao.update(id, existing);
-        ctx.status(200).json(convertToDTO(updatedGame));
+        ctx.status(200).json(GameMapper.toDTO(updatedGame));
     }
 
     @Override
@@ -105,7 +106,7 @@ public class GameController implements IController<GameDTO, Long> {
                             "SELECT g FROM Game g JOIN g.maps m WHERE m.id = :mapId", Game.class)
                     .setParameter("mapId", mapId)
                     .getResultList();
-            ctx.status(200).json(games.stream().map(this::convertToDTO).collect(Collectors.toList()));
+            ctx.status(200).json(games.stream().map(GameMapper::toDTO).collect(Collectors.toList()));
         }
     }
 
@@ -118,42 +119,7 @@ public class GameController implements IController<GameDTO, Long> {
                             "SELECT g FROM Game g JOIN g.guns gu WHERE gu.id = :gunId", Game.class)
                     .setParameter("gunId", gunId)
                     .getResultList();
-            ctx.status(200).json(games.stream().map(this::convertToDTO).collect(Collectors.toList()));
-        }
-    }
-
-    private GameDTO convertToDTO(Game game) {
-        List<Long> mapIds = game.getMaps().stream().map(Map::getId).collect(Collectors.toList());
-        List<Long> gunIds = game.getGuns().stream().map(Gun::getId).collect(Collectors.toList());
-        return new GameDTO(game.getId(), game.getName(), mapIds, gunIds);
-    }
-
-    private Game convertToEntity(GameDTO dto) {
-        try (EntityManager em = emf.createEntityManager()) {
-            em.getTransaction().begin();
-
-            Game game = new Game();
-            game.setName(dto.getName());
-
-            if (!dto.getMapIds().isEmpty()) {
-                Set<Map> maps = new HashSet<>(em.createQuery(
-                                "SELECT m FROM Map m WHERE m.id IN :ids", Map.class)
-                        .setParameter("ids", dto.getMapIds())
-                        .getResultList());
-                game.setMaps(maps);
-            }
-
-            if (!dto.getGunIds().isEmpty()) {
-                Set<Gun> guns = new HashSet<>(em.createQuery(
-                                "SELECT g FROM Gun g WHERE g.id IN :ids", Gun.class)
-                        .setParameter("ids", dto.getGunIds())
-                        .getResultList());
-                game.setGuns(guns);
-            }
-
-            em.persist(game);
-            em.getTransaction().commit();
-            return game;
+            ctx.status(200).json(games.stream().map(GameMapper::toDTO).collect(Collectors.toList()));
         }
     }
 

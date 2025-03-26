@@ -6,6 +6,7 @@ import dat.dao.impl.GameDAO;
 import dat.dao.impl.GunDAO;
 import dat.dtos.GunDTO;
 import dat.entities.Game;
+import dat.services.mappers.GunMapper;
 import dat.entities.Gun;
 import io.javalin.http.Context;
 import jakarta.persistence.EntityManager;
@@ -31,7 +32,7 @@ public class GunController implements IController<GunDTO, Long> {
 
         Gun gun = gunDao.read(id);
         if (gun != null) {
-            ctx.status(200).json(convertToDTO(gun));
+            ctx.status(200).json(GunMapper.toDTO(gun));
         } else {
             ctx.status(404);
         }
@@ -40,16 +41,16 @@ public class GunController implements IController<GunDTO, Long> {
     @Override
     public void readAll(Context ctx) {
         ctx.status(200).json(gunDao.readAll().stream()
-                .map(this::convertToDTO)
+                .map(GunMapper::toDTO)
                 .toList());
     }
 
     @Override
     public void create(Context ctx) {
         GunDTO gunDTO = validateEntity(ctx);
-        Gun gun = convertToEntity(gunDTO);
+        Gun gun = GunMapper.toEntity(gunDTO);
         Gun createdGun = gunDao.create(gun);
-        ctx.status(201).json(convertToDTO(createdGun));
+        ctx.status(201).json(GunMapper.toDTO(createdGun));
     }
 
     @Override
@@ -77,7 +78,7 @@ public class GunController implements IController<GunDTO, Long> {
         }
 
         Gun updatedGun = gunDao.update(id, existing);
-        ctx.status(200).json(convertToDTO(updatedGun));
+        ctx.status(200).json(GunMapper.toDTO(updatedGun));
     }
 
     @Override
@@ -109,33 +110,9 @@ public class GunController implements IController<GunDTO, Long> {
 
         Gun randomGun = gunDao.getRandomByGameId(gameId);
         if (randomGun != null) {
-            ctx.status(200).json(convertToDTO(randomGun));
+            ctx.status(200).json(GunMapper.toDTO(randomGun));
         } else {
             ctx.status(404);
         }
-    }
-
-    private GunDTO convertToDTO(Gun gun) {
-        return new GunDTO(
-                gun.getId(),
-                gun.getName(),
-                gun.getGame() != null ? gun.getGame().getId() : null,
-                gun.isTeamId()
-        );
-    }
-
-    private Gun convertToEntity(GunDTO dto) {
-        Gun gun = new Gun();
-        gun.setName(dto.getName());
-        gun.setTeamId(dto.isTeamId());
-
-        try (EntityManager em = emf.createEntityManager()) {
-            em.getTransaction().begin();
-            Game game = em.find(Game.class, dto.getGameId());
-            gun.setGame(game);
-            em.getTransaction().commit();
-        }
-
-        return gun;
     }
 }
