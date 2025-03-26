@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d6322bd-7cb8-4811-8f5e-f5acf75604c7" name="Changes" comment="Route push">
-      <change afterPath="$PROJECT_DIR$/src/main/java/dat/http-client.env.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="5d6322bd-7cb8-4811-8f5e-f5acf75604c7" name="Changes" comment="http test">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dat/demo.http" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dat/demo.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dat/routes/Routes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dat/routes/Routes.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,6 +68,8 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.Populator.executor": "Run",
     "HTTP Request.All in demo.executor": "Run",
     "HTTP Request.demo | 0. Environment selector (run this first).executor": "Run",
     "HTTP Request.demo | 11. Create new game.executor": "Run",
@@ -83,6 +84,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "dev",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
@@ -114,6 +116,32 @@
     </key>
   </component>
   <component name="RunManager" selected="HTTP Request.All in demo">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="dat.Main" />
+      <module name="SP2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dat.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Populator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="dat.config.Populator" />
+      <module name="SP2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dat.config.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="All in demo" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$PROJECT_DIR$/src/main/java/dat/demo.http">
       <method v="2" />
     </configuration>
@@ -123,30 +151,13 @@
     <configuration name="demo | 11. Create new game" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/java/dat/demo.http" index="12" requestIdentifier="11. Create new game" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="All in SP2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="SP2" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="StrategyDAOTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="SP2" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="StrategyDAOTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="HTTP Request.All in demo" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Populator" />
         <item itemvalue="HTTP Request.demo | 0. Environment selector (run this first)" />
         <item itemvalue="HTTP Request.demo | 11. Create new game" />
-        <item itemvalue="JUnit.All in SP2" />
-        <item itemvalue="JUnit.StrategyDAOTest" />
       </list>
     </recent_temporary>
   </component>
@@ -302,7 +313,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742988249158</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="http test">
+      <option name="closed" value="true" />
+      <created>1742990487839</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1742990487839</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -327,6 +346,7 @@
     <MESSAGE value="Interface push - controllers" />
     <MESSAGE value="Controller push" />
     <MESSAGE value="Route push" />
-    <option name="LAST_COMMIT_MESSAGE" value="Route push" />
+    <MESSAGE value="http test" />
+    <option name="LAST_COMMIT_MESSAGE" value="http test" />
   </component>
 </project>
