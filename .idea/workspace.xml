@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d6322bd-7cb8-4811-8f5e-f5acf75604c7" name="Changes" comment="Controller push">
-      <change afterPath="$PROJECT_DIR$/src/main/java/dat/routes/GameRoute.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dat/routes/GunRoute.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dat/routes/Routes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dat/routes/StrategyRoute.java" afterDir="false" />
+    <list default="true" id="5d6322bd-7cb8-4811-8f5e-f5acf75604c7" name="Changes" comment="Route push">
+      <change afterPath="$PROJECT_DIR$/src/main/java/dat/http-client.env.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dat/controllers/impl/StrategyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dat/controllers/impl/StrategyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dat/routes/MapRoutes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dat/routes/MapRoute.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dat/demo.http" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dat/demo.http" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,6 +56,9 @@
     &quot;accountId&quot;: &quot;df1102a9-fdfc-4c30-a1da-e850f57b54ea&quot;
   }
 }</component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -67,40 +67,43 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;JUnit.All in SP2.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GameDAOTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GameDAOTest.testCreate.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GunDAOTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.MapDAOTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.StrategyDAOTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.StrategyDAOTest.testGetRandomByMapAndType.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserDAOTest.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/busin/Documents/F24_Sem3_Programming/SP2_&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "HTTP Request.All in demo.executor": "Run",
+    "HTTP Request.demo | 0. Environment selector (run this first).executor": "Run",
+    "HTTP Request.demo | 11. Create new game.executor": "Run",
+    "JUnit.All in SP2.executor": "Run",
+    "JUnit.GameDAOTest.executor": "Run",
+    "JUnit.GameDAOTest.testCreate.executor": "Run",
+    "JUnit.GunDAOTest.executor": "Run",
+    "JUnit.MapDAOTest.executor": "Run",
+    "JUnit.StrategyDAOTest.executor": "Run",
+    "JUnit.StrategyDAOTest.testGetRandomByMapAndType.executor": "Run",
+    "JUnit.UserDAOTest.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "dev",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/busin/Documents/F24_Sem3_Programming/SP2_",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\busin\Documents\F24_Sem3_Programming\SP2_" />
@@ -110,20 +113,20 @@
       <recent name="C:\Users\busin\Documents\F24_Sem3_Programming\SP2_" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in SP2">
+  <component name="RunManager" selected="HTTP Request.All in demo">
+    <configuration name="All in demo" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$PROJECT_DIR$/src/main/java/dat/demo.http">
+      <method v="2" />
+    </configuration>
+    <configuration name="demo | 0. Environment selector (run this first)" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/java/dat/demo.http" requestIdentifier="0. Environment selector (run this first)" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="demo | 11. Create new game" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/java/dat/demo.http" index="12" requestIdentifier="11. Create new game" runType="Run single request">
+      <method v="2" />
+    </configuration>
     <configuration name="All in SP2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="SP2" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MapDAOTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="SP2" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="MapDAOTest" />
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -137,32 +140,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StrategyDAOTest.testGetRandomByMapAndType" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="SP2" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="StrategyDAOTest" />
-      <option name="METHOD_NAME" value="testGetRandomByMapAndType" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UserDAOTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="SP2" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="UserDAOTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="HTTP Request.All in demo" />
+        <item itemvalue="HTTP Request.demo | 0. Environment selector (run this first)" />
+        <item itemvalue="HTTP Request.demo | 11. Create new game" />
         <item itemvalue="JUnit.All in SP2" />
         <item itemvalue="JUnit.StrategyDAOTest" />
-        <item itemvalue="JUnit.StrategyDAOTest.testGetRandomByMapAndType" />
-        <item itemvalue="JUnit.UserDAOTest" />
-        <item itemvalue="JUnit.MapDAOTest" />
       </list>
     </recent_temporary>
   </component>
@@ -310,7 +294,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742987723370</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Route push">
+      <option name="closed" value="true" />
+      <created>1742988249158</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1742988249158</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -334,6 +326,7 @@
     <MESSAGE value="Added config.properties file" />
     <MESSAGE value="Interface push - controllers" />
     <MESSAGE value="Controller push" />
-    <option name="LAST_COMMIT_MESSAGE" value="Controller push" />
+    <MESSAGE value="Route push" />
+    <option name="LAST_COMMIT_MESSAGE" value="Route push" />
   </component>
 </project>

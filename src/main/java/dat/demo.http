@@ -1,1 +1,202 @@
+### 0. Environment selector (run this first)
+# @no-redirect
+# @no-log
+GET {{baseUrl}}/auth/test/
+?environment=dev
 
+> {%
+    client.test("Environment check", function() {
+        client.assert(response.status === 200, "Environment setup failed");
+    });
+%}
+
+### 1. Test endpoint - no auth needed
+GET {{baseUrl}}/auth/test/
+
+> {%
+    client.test("Test endpoint accessible", function() {
+        client.assert(response.status === 200, "Test endpoint failed");
+    });
+%}
+
+### 2. Populate with test data
+GET {{baseUrl}}/games/populate/
+
+> {%
+    client.test("Database populated", function() {
+        client.assert(response.status === 200, "Population failed");
+    });
+%}
+
+### 3. Register new user
+POST {{baseUrl}}/auth/register/
+Content-Type: application/json
+
+{
+  "username": "gamer",
+  "password": "game123"
+}
+
+> {%
+    client.test("User registration", function() {
+        client.assert(response.status === 200 || response.status === 201, "Registration failed");
+    });
+%}
+
+### 4. Login and get JWT token
+POST {{baseUrl}}/auth/login/
+Content-Type: application/json
+
+{
+  "username": "gamer",
+  "password": "game123"
+}
+
+> {%
+    client.test("Login successful", function() {
+        client.assert(response.status === 200, "Login failed");
+        client.assert(response.body.token, "No token received");
+        client.global.set("jwt_token", response.body.token);
+        client.log("JWT Token: " + client.global.get("jwt_token"));
+    });
+%}
+
+### 5. Test protected user endpoint
+GET {{baseUrl}}/protected/user_demo/
+Authorization: Bearer {{jwt_token}}
+
+> {%
+    client.test("User endpoint accessible", function() {
+        client.assert(response.status === 200, "User endpoint failed");
+    });
+%}
+
+### 6. Try admin endpoint (should fail initially)
+GET {{baseUrl}}/protected/admin_demo/
+Authorization: Bearer {{jwt_token}}
+
+> {%
+    client.test("Admin endpoint should fail", function() {
+        client.assert(response.status === 403, "Expected 403 Forbidden");
+    });
+%}
+
+### 7. Add admin role to user
+POST {{baseUrl}}/auth/user/addrole/
+Authorization: Bearer {{jwt_token}}
+Content-Type: application/json
+
+{
+  "role": "admin"
+}
+
+> {%
+    client.test("Role added successfully", function() {
+        client.assert(response.status === 200, "Role addition failed");
+    });
+%}
+
+### 8. Try admin endpoint again (should work now)
+GET {{baseUrl}}/protected/admin_demo/
+Authorization: Bearer {{jwt_token}}
+
+> {%
+    client.test("Admin endpoint now accessible", function() {
+        client.assert(response.status === 200, "Admin endpoint still not accessible");
+    });
+%}
+
+### GAME API ###
+### 9. Get all games
+GET {{baseUrl}}/games/
+Authorization: Bearer {{jwt_token}}
+
+> {%
+    client.test("Get all games", function() {
+        client.assert(response.status === 200, "Failed to get games");
+        client.assert(response.body.length > 0, "No games returned");
+    });
+%}
+
+### 10. Get specific game
+GET {{baseUrl}}/games/1
+Authorization: Bearer {{jwt_token}}
+
+> {%
+    client.test("Get specific game", function() {
+        client.assert(response.status === 200, "Failed to get game");
+        client.assert(response.body.id === 1, "Wrong game returned");
+    });
+%}
+
+### 11. Create new game
+POST {{baseUrl}}/games/
+Authorization: Bearer {{jwt_token}}
+Content-Type: application/json
+
+{
+  "name": "Counter-Strike 2",
+  "mapIds": [1, 2],
+  "gunIds": [1, 3]
+}
+
+> {%
+    client.test("Game created", function() {
+        client.assert(response.status === 201, "Game creation failed");
+        client.global.set("new_game_id", response.body.id);
+    });
+%}
+
+### 12. Update game
+PUT {{baseUrl}}/games/1
+Authorization: Bearer {{jwt_token}}
+Content-Type: application/json
+
+{
+  "name": "CS2 Updated",
+  "mapIds": [1, 2, 3],
+  "gunIds": [1, 2, 3]
+}
+
+> {%
+    client.test("Game updated", function() {
+        client.assert(response.status === 200, "Game update failed");
+    });
+%}
+
+### 13. Delete game
+DELETE {{baseUrl}}/games/1
+Authorization: Bearer {{jwt_token}}
+
+> {%
+    client.test("Game deleted", function() {
+        client.assert(response.status === 200 || response.status === 204, "Game deletion failed");
+    });
+%}
+
+### GUN API ###
+### 14. Get all guns
+GET {{baseUrl}}/guns/
+Authorization: Bearer {{jwt_token}}
+
+### 15. Get random gun by game
+GET {{baseUrl}}/guns/random/game/2
+Authorization: Bearer {{jwt_token}}
+
+### MAP API ###
+### 16. Get all maps
+GET {{baseUrl}}/maps/
+Authorization: Bearer {{jwt_token}}
+
+### 17. Get map with strategies
+GET {{baseUrl}}/maps/1/with-strategies
+Authorization: Bearer {{jwt_token}}
+
+### STRATEGY API ###
+### 18. Get strategies by map
+GET {{baseUrl}}/strategies/map/1
+Authorization: Bearer {{jwt_token}}
+
+### 19. Get random strategy by map and type
+GET {{baseUrl}}/strategies/random/map/1
+Authorization: Bearer {{jwt_token}}
