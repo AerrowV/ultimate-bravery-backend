@@ -1,6 +1,7 @@
 package dat.controllers.impl;
 
 import dat.config.HibernateConfig;
+import dat.config.Populate;
 import dat.controllers.IController;
 import dat.dao.impl.GameDAO;
 import dat.dtos.GameDTO;
@@ -179,5 +180,10 @@ public class GameController implements IController<GameDTO, Long> {
             }
             em.getTransaction().commit();
         }
+    }
+
+    public void populate(Context ctx) {
+        Populate.populate(HibernateConfig.getEntityManagerFactory());
+        ctx.result("Populated database with game, maps, guns, and strategies.");
     }
 }

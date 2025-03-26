@@ -11,6 +11,7 @@ public class GameRoute {
 
     public EndpointGroup getRoutes() {
         return () -> {
+            get("/populate", gameController::populate);
             get("/", gameController::readAll);
             get("/{id}", gameController::read);
             post("/", gameController::create);

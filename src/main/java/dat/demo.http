@@ -1,17 +1,5 @@
-### 0. Environment selector (run this first)
-# @no-redirect
-# @no-log
-GET {{baseUrl}}/auth/test/
-?environment=dev
-
-> {%
-    client.test("Environment check", function() {
-        client.assert(response.status === 200, "Environment setup failed");
-    });
-%}
-
 ### 1. Test endpoint - no auth needed
-GET {{baseUrl}}/auth/test/
+GET {{url}}/auth/test/
 
 > {%
     client.test("Test endpoint accessible", function() {
@@ -20,7 +8,7 @@ GET {{baseUrl}}/auth/test/
 %}
 
 ### 2. Populate with test data
-GET {{baseUrl}}/games/populate/
+GET {{url}}/games/populate/
 
 > {%
     client.test("Database populated", function() {
@@ -29,7 +17,7 @@ GET {{baseUrl}}/games/populate/
 %}
 
 ### 3. Register new user
-POST {{baseUrl}}/auth/register/
+POST {{url}}/auth/register/
 Content-Type: application/json
 
 {
@@ -44,7 +32,7 @@ Content-Type: application/json
 %}
 
 ### 4. Login and get JWT token
-POST {{baseUrl}}/auth/login/
+POST {{url}}/auth/login/
 Content-Type: application/json
 
 {
@@ -61,28 +49,8 @@ Content-Type: application/json
     });
 %}
 
-### 5. Test protected user endpoint
-GET {{baseUrl}}/protected/user_demo/
-Authorization: Bearer {{jwt_token}}
-
-> {%
-    client.test("User endpoint accessible", function() {
-        client.assert(response.status === 200, "User endpoint failed");
-    });
-%}
-
-### 6. Try admin endpoint (should fail initially)
-GET {{baseUrl}}/protected/admin_demo/
-Authorization: Bearer {{jwt_token}}
-
-> {%
-    client.test("Admin endpoint should fail", function() {
-        client.assert(response.status === 403, "Expected 403 Forbidden");
-    });
-%}
-
-### 7. Add admin role to user
-POST {{baseUrl}}/auth/user/addrole/
+### 5. Add admin role to user
+POST {{url}}/auth/user/addrole/
 Authorization: Bearer {{jwt_token}}
 Content-Type: application/json
 
@@ -96,19 +64,9 @@ Content-Type: application/json
     });
 %}
 
-### 8. Try admin endpoint again (should work now)
-GET {{baseUrl}}/protected/admin_demo/
-Authorization: Bearer {{jwt_token}}
-
-> {%
-    client.test("Admin endpoint now accessible", function() {
-        client.assert(response.status === 200, "Admin endpoint still not accessible");
-    });
-%}
-
 ### GAME API ###
-### 9. Get all games
-GET {{baseUrl}}/games/
+### 6. Get all games
+GET {{url}}/games/
 Authorization: Bearer {{jwt_token}}
 
 > {%
@@ -118,8 +76,8 @@ Authorization: Bearer {{jwt_token}}
     });
 %}
 
-### 10. Get specific game
-GET {{baseUrl}}/games/1
+### 7. Get specific game
+GET {{url}}/games/1
 Authorization: Bearer {{jwt_token}}
 
 > {%
@@ -129,8 +87,8 @@ Authorization: Bearer {{jwt_token}}
     });
 %}
 
-### 11. Create new game
-POST {{baseUrl}}/games/
+### 8. Create new game
+POST {{url}}/games/
 Authorization: Bearer {{jwt_token}}
 Content-Type: application/json
 
@@ -147,8 +105,8 @@ Content-Type: application/json
     });
 %}
 
-### 12. Update game
-PUT {{baseUrl}}/games/1
+### 9. Update game
+PUT {{url}}/games/1
 Authorization: Bearer {{jwt_token}}
 Content-Type: application/json
 
@@ -164,8 +122,8 @@ Content-Type: application/json
     });
 %}
 
-### 13. Delete game
-DELETE {{baseUrl}}/games/1
+### 10. Delete game
+DELETE {{url}}/games/1
 Authorization: Bearer {{jwt_token}}
 
 > {%
@@ -175,28 +133,28 @@ Authorization: Bearer {{jwt_token}}
 %}
 
 ### GUN API ###
-### 14. Get all guns
-GET {{baseUrl}}/guns/
+### 11. Get all guns
+GET {{url}}/guns/
 Authorization: Bearer {{jwt_token}}
 
-### 15. Get random gun by game
-GET {{baseUrl}}/guns/random/game/2
+### 12. Get random gun by game
+GET {{url}}/guns/random/game/2
 Authorization: Bearer {{jwt_token}}
 
 ### MAP API ###
-### 16. Get all maps
-GET {{baseUrl}}/maps/
+### 13. Get all maps
+GET {{url}}/maps/
 Authorization: Bearer {{jwt_token}}
 
-### 17. Get map with strategies
-GET {{baseUrl}}/maps/1/with-strategies
+### 14. Get map with strategies
+GET {{url}}/maps/1/with-strategies
 Authorization: Bearer {{jwt_token}}
 
 ### STRATEGY API ###
-### 18. Get strategies by map
-GET {{baseUrl}}/strategies/map/1
+### 15. Get strategies by map
+GET {{url}}/strategies/map/1
 Authorization: Bearer {{jwt_token}}
 
-### 19. Get random strategy by map and type
-GET {{baseUrl}}/strategies/random/map/1
+### 16. Get random strategy by map and type
+GET {{url}}/strategies/random/map/1
 Authorization: Bearer {{jwt_token}}

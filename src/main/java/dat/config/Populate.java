@@ -10,23 +10,19 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 
-public class Populator {
-    public static void main(String[] args) {
-
-        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
+public class Populate {
+    public static void populate(EntityManagerFactory emf) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
         try {
-
             tx.begin();
 
-            Game game1 = new Game("Counter Strike");
-
+            Game game1 = new Game("Counter Strike 2");
             em.persist(game1);
 
-            Strategy strategy1 = new Strategy("Mid fake", "2 terrorist push mid with flash, the rest waits in b doors until attention is mid, then rush up b ramp.", false, StrategyType.SERIOUS);
-            Strategy strategy2 = new Strategy("B split(Cave push)", "First 4 terrorist push cave, 1 waits ramp for them to crunch 'B' site at the same time.", false, StrategyType.AVERAGE);
+            Strategy strategy1 = new Strategy("Mid fake", "Two terrorists push mid with a flash. The rest wait at B doors until attention is drawn mid, then rush up B ramp.", false, StrategyType.SERIOUS);
+            Strategy strategy2 = new Strategy("B split (Cave push)", "Four terrorists push through cave. One waits at ramp. All crunch B site at the same time.", false, StrategyType.AVERAGE);
 
             em.persist(strategy1);
             em.persist(strategy2);
@@ -41,21 +37,16 @@ public class Populator {
             strategy2.getMaps().add(map1);
 
             Gun gun1 = new Gun("AK-47", false, game1);
-
             em.persist(gun1);
 
             tx.commit();
-
-            System.out.println("Database populated with sample data.");
+            System.out.println("Populated database via HTTP request");
 
         } catch (RuntimeException e) {
-            if (tx.isActive()) {
-                tx.rollback();
-            }
+            if (tx.isActive()) tx.rollback();
             e.printStackTrace();
         } finally {
             em.close();
-            emf.close();
         }
     }
 }
