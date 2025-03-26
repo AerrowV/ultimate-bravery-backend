@@ -10,9 +10,7 @@ public class GameMapper {
     public static GameDTO toDTO(Game game) {
         return new GameDTO(
                 game.getId(),
-                game.getName(),
-                game.getMaps().stream().map(m -> m.getId()).collect(Collectors.toList()),
-                game.getGuns().stream().map(g -> g.getId()).collect(Collectors.toList())
+                game.getName()
         );
     }
 

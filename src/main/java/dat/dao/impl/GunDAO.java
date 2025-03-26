@@ -1,7 +1,9 @@
 package dat.dao.impl;
 
 import dat.dao.IDAO;
+import dat.dtos.GunDTO;
 import dat.entities.Gun;
+import dat.services.mappers.GunMapper;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
@@ -79,15 +81,16 @@ public class GunDAO implements IDAO<Gun, Long> {
         }
     }
 
+
     public Gun getRandomByGameId(Long gameId) {
         try (EntityManager em = emf.createEntityManager()) {
-            TypedQuery<Gun> query = em.createQuery("SELECT g FROM Gun g WHERE g.game.id = :gameId", Gun.class);
-            query.setParameter("gameId", gameId);
+            List<Gun> guns = em.createQuery(
+                            "SELECT g FROM Gun g LEFT JOIN FETCH g.game WHERE g.game.id = :gameId",
+                            Gun.class)
+                    .setParameter("gameId", gameId)
+                    .getResultList();
 
-            List<Gun> guns = query.getResultList();
-            if (guns.isEmpty()) return null;
-
-            return guns.get(new Random().nextInt(guns.size()));
+            return guns.isEmpty() ? null : guns.get(new Random().nextInt(guns.size()));
         }
     }
 }

@@ -69,7 +69,6 @@ public class GameController implements IController<GameDTO, Long> {
             return;
         }
         existing.setName(gameDTO.getName());
-        updateRelationships(existing, gameDTO);
         Game updatedGame = dao.update(id, existing);
         ctx.status(200).json(GameMapper.toDTO(updatedGame));
     }
@@ -91,10 +90,9 @@ public class GameController implements IController<GameDTO, Long> {
     @Override
     public GameDTO validateEntity(Context ctx) {
         return ctx.bodyValidator(GameDTO.class)
-                .check(g -> g.getName() != null && !g.getName().isEmpty(), "Game name is required")
-                .check(g -> g.getMapIds() != null, "Map IDs must be provided")
-                .check(g -> g.getGunIds() != null, "Gun IDs must be provided")
-                .get();
+                .check(g -> g.getName() != null && !g.getName().isEmpty(),
+                        "Game name is required")
+                .get(); // Only validate what exists in DTO
     }
 
     public void getByMap(Context ctx) {
@@ -120,30 +118,6 @@ public class GameController implements IController<GameDTO, Long> {
                     .setParameter("gunId", gunId)
                     .getResultList();
             ctx.status(200).json(games.stream().map(GameMapper::toDTO).collect(Collectors.toList()));
-        }
-    }
-
-    private void updateRelationships(Game game, GameDTO dto) {
-        try (EntityManager em = emf.createEntityManager()) {
-            em.getTransaction().begin();
-            Game managedGame = em.merge(game);
-            if (dto.getMapIds() != null) {
-                List<Map> maps = em.createQuery(
-                                "SELECT m FROM Map m WHERE m.id IN :ids", Map.class)
-                        .setParameter("ids", dto.getMapIds())
-                        .getResultList();
-                managedGame.getMaps().clear();
-                managedGame.getMaps().addAll(maps);
-            }
-            if (dto.getGunIds() != null) {
-                List<Gun> guns = em.createQuery(
-                                "SELECT g FROM Gun g WHERE g.id IN :ids", Gun.class)
-                        .setParameter("ids", dto.getGunIds())
-                        .getResultList();
-                managedGame.getGuns().clear();
-                managedGame.getGuns().addAll(guns);
-            }
-            em.getTransaction().commit();
         }
     }
 }

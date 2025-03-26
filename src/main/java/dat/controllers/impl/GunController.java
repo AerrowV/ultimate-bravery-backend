@@ -104,15 +104,8 @@ public class GunController implements IController<GunDTO, Long> {
     }
 
     public void getRandomByGame(Context ctx) {
-        Long gameId = ctx.pathParamAsClass("gameId", Long.class)
-                .check(id -> id != null && id > 0, "Invalid game ID")
-                .get();
-
+        Long gameId = ctx.pathParamAsClass("gameId", Long.class).get();
         Gun randomGun = gunDao.getRandomByGameId(gameId);
-        if (randomGun != null) {
-            ctx.status(200).json(GunMapper.toDTO(randomGun));
-        } else {
-            ctx.status(404);
-        }
+        ctx.json(randomGun != null ? GunMapper.toDTO(randomGun) : null);
     }
 }

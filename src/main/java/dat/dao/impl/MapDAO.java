@@ -26,14 +26,18 @@ public class MapDAO implements IDAO<Map, Long> {
     @Override
     public Map read(Long id) {
         try (EntityManager em = emf.createEntityManager()) {
-            return em.find(Map.class, id);
+            return em.createQuery(
+                            "SELECT m FROM Map m LEFT JOIN FETCH m.strategies WHERE m.id = :id", Map.class)
+                    .setParameter("id", id)
+                    .getSingleResult();
         }
     }
 
     @Override
     public List<Map> readAll() {
         try (EntityManager em = emf.createEntityManager()) {
-            TypedQuery<Map> query = em.createQuery("SELECT m FROM Map m", Map.class);
+            TypedQuery<Map> query = em.createQuery(
+                    "SELECT DISTINCT m FROM Map m LEFT JOIN FETCH m.strategies", Map.class);
             return query.getResultList();
         }
     }
@@ -82,8 +86,7 @@ public class MapDAO implements IDAO<Map, Long> {
     public Map readWithStrategies(Long id) {
         try (EntityManager em = emf.createEntityManager()) {
             TypedQuery<Map> query = em.createQuery(
-                    "SELECT DISTINCT m FROM Map m LEFT JOIN FETCH m.strategies WHERE m.id = :id",
-                    Map.class
+                    "SELECT m FROM Map m LEFT JOIN FETCH m.strategies WHERE m.id = :id", Map.class
             );
             query.setParameter("id", id);
             return query.getSingleResult();
