@@ -24,4 +24,8 @@ public class Role {
 
     public Role() {
     }
+
+    public String getRoleName() {
+        return name;
+    }
 }
