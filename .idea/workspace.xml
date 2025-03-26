@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d6322bd-7cb8-4811-8f5e-f5acf75604c7" name="Changes" comment="Added config.properties file">
+    <list default="true" id="5d6322bd-7cb8-4811-8f5e-f5acf75604c7" name="Changes" comment="Interface push - controllers">
+      <change afterPath="$PROJECT_DIR$/src/main/java/dat/controllers/impl/GameController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dat/controllers/impl/GunController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dat/controllers/impl/MapController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dat/controllers/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dat/controllers/impl/AccountController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,6 +19,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -60,40 +65,40 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JUnit.All in SP2.executor": "Run",
-    "JUnit.GameDAOTest.executor": "Run",
-    "JUnit.GameDAOTest.testCreate.executor": "Run",
-    "JUnit.GunDAOTest.executor": "Run",
-    "JUnit.MapDAOTest.executor": "Run",
-    "JUnit.StrategyDAOTest.executor": "Run",
-    "JUnit.StrategyDAOTest.testGetRandomByMapAndType.executor": "Run",
-    "JUnit.UserDAOTest.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "dev",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/busin/Documents/F24_Sem3_Programming/SP2_",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.All in SP2.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameDAOTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GameDAOTest.testCreate.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.GunDAOTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MapDAOTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.StrategyDAOTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.StrategyDAOTest.testGetRandomByMapAndType.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserDAOTest.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/busin/Documents/F24_Sem3_Programming/SP2_&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\busin\Documents\F24_Sem3_Programming\SP2_" />
@@ -279,7 +284,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742926036099</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Interface push - controllers">
+      <option name="closed" value="true" />
+      <created>1742986274231</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1742986274231</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -301,6 +314,7 @@
     <MESSAGE value="Reformatted code" />
     <MESSAGE value="Added Dockerfile and workflow.yml" />
     <MESSAGE value="Added config.properties file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added config.properties file" />
+    <MESSAGE value="Interface push - controllers" />
+    <option name="LAST_COMMIT_MESSAGE" value="Interface push - controllers" />
   </component>
 </project>

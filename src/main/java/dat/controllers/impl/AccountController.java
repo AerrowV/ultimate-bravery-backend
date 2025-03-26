@@ -1,4 +1,4 @@
-package dat.controllers;
+package dat.controllers.impl;
 
 import dat.dao.impl.UserDAO;
 import dat.entities.Role;
