@@ -9,7 +9,7 @@ import java.util.Set;
 
 /**
  * Purpose: To handle security in the API at the route level
- *  Author: Jon Bertelsen
+ * Author: Jon Bertelsen
  */
 
 public class AccessController implements IAccessController {
@@ -18,6 +18,7 @@ public class AccessController implements IAccessController {
 
     /**
      * This method checks if the user has the necessary roles to access the route.
+     *
      * @param ctx
      */
     public void accessHandler(Context ctx) {

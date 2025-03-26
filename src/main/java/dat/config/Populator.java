@@ -1,7 +1,11 @@
 package dat.config;
 
 
-import dat.entities.*;
+import dat.entities.Game;
+import dat.entities.Gun;
+import dat.entities.Map;
+import dat.entities.Strategy;
+import dat.entities.enums.StrategyType;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;

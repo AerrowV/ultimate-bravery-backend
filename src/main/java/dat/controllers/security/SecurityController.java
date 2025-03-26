@@ -2,7 +2,6 @@ package dat.controllers.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import dat.utils.Utils;
 import dat.config.HibernateConfig;
 import dat.dao.security.ISecurityDAO;
 import dat.dao.security.SecurityDAO;
@@ -10,6 +9,7 @@ import dat.entities.User;
 import dat.exceptions.ApiRuntimeException;
 import dat.exceptions.NotAuthorizedException;
 import dat.exceptions.ValidationException;
+import dat.utils.Utils;
 import dk.bugelhartmann.ITokenSecurity;
 import dk.bugelhartmann.TokenSecurity;
 import dk.bugelhartmann.TokenVerificationException;
@@ -34,13 +34,14 @@ import java.util.stream.Collectors;
  * Author: Thomas Hartmann
  */
 public class SecurityController implements ISecurityController {
-    ObjectMapper objectMapper = new ObjectMapper();
-    ITokenSecurity tokenSecurity = new TokenSecurity();
     private static ISecurityDAO securityDAO;
     private static SecurityController instance;
     private static Logger logger = LoggerFactory.getLogger(SecurityController.class);
+    ObjectMapper objectMapper = new ObjectMapper();
+    ITokenSecurity tokenSecurity = new TokenSecurity();
 
-    private SecurityController() { }
+    private SecurityController() {
+    }
 
     public static SecurityController getInstance() { // Singleton because we don't want multiple instances of the same class
         if (instance == null) {

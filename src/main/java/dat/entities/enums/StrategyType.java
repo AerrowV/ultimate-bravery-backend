@@ -1,4 +1,4 @@
-package dat.entities;
+package dat.entities.enums;
 
 public enum StrategyType {
     SERIOUS,

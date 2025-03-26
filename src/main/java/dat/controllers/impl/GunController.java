@@ -11,8 +11,6 @@ import io.javalin.http.Context;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
-import java.util.Random;
-
 public class GunController implements IController<GunDTO, Long> {
 
     private final GunDAO gunDao;

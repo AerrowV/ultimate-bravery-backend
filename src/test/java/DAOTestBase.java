@@ -1,7 +1,10 @@
 import dat.config.HibernateConfig;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.TestInstance;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class DAOTestBase {
@@ -13,6 +16,10 @@ public class DAOTestBase {
             HibernateConfig.setTest(true);
             emf = HibernateConfig.getEntityManagerFactoryForTest();
         }
+    }
+
+    @AfterAll
+    static void tearDownAll() {
     }
 
     @AfterEach
@@ -31,9 +38,5 @@ public class DAOTestBase {
                 e.printStackTrace();
             }
         }
-    }
-
-    @AfterAll
-    static void tearDownAll() {
     }
 }

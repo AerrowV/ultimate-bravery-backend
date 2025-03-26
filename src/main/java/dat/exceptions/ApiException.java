@@ -1,6 +1,6 @@
 package dat.exceptions;
 
-public class ApiException extends Exception{
+public class ApiException extends Exception {
 
     private final int statusCode;
 

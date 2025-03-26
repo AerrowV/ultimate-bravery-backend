@@ -2,7 +2,7 @@ package dat.services.mappers;
 
 import dat.dtos.StrategyDTO;
 import dat.entities.Strategy;
-import dat.entities.StrategyType;
+import dat.entities.enums.StrategyType;
 
 import java.util.stream.Collectors;
 

@@ -2,8 +2,7 @@ import dat.dao.impl.MapDAO;
 import dat.dao.impl.StrategyDAO;
 import dat.entities.Map;
 import dat.entities.Strategy;
-import dat.entities.StrategyType;
-import jakarta.persistence.EntityManager;
+import dat.entities.enums.StrategyType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

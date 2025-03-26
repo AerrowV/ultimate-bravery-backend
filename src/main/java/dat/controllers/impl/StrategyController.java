@@ -7,10 +7,12 @@ import dat.dao.impl.StrategyDAO;
 import dat.dtos.StrategyDTO;
 import dat.entities.Map;
 import dat.entities.Strategy;
-import dat.entities.StrategyType;
+import dat.entities.enums.StrategyType;
+import dat.entities.enums.StrategyType;
 import io.javalin.http.Context;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;

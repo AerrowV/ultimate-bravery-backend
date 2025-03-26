@@ -17,7 +17,8 @@ public class Utils {
     public static void main(String[] args) {
         System.out.println(getPropertyValue("db.name", "properties-from-pom.properties"));
     }
-    public static String getPropertyValue(String propName, String resourceName)  {
+
+    public static String getPropertyValue(String propName, String resourceName) {
         // REMEMBER TO BUILD WITH MAVEN FIRST. Read the property file if not deployed (else read system vars instead)
         // Read from ressources/config.properties or from pom.xml depending on the ressourceName
         try (InputStream is = Utils.class.getClassLoader().getResourceAsStream(resourceName)) {
@@ -36,14 +37,6 @@ public class Utils {
         }
     }
 
-    public ObjectMapper getObjectMapper() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false); // Ignore unknown properties in JSON
-        objectMapper.registerModule(new JavaTimeModule()); // Serialize and deserialize java.time objects
-        objectMapper.writer(new DefaultPrettyPrinter());
-        return objectMapper;
-    }
-
     public static String convertToJsonMessage(Context ctx, String property, String message) {
         Map<String, String> msgMap = new HashMap<>();
         msgMap.put(property, message);  // Put the message in the map
@@ -54,5 +47,13 @@ public class Utils {
         } catch (Exception e) {
             return "{\"error\": \"Could not convert  message to JSON\"}";
         }
+    }
+
+    public ObjectMapper getObjectMapper() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false); // Ignore unknown properties in JSON
+        objectMapper.registerModule(new JavaTimeModule()); // Serialize and deserialize java.time objects
+        objectMapper.writer(new DefaultPrettyPrinter());
+        return objectMapper;
     }
 }

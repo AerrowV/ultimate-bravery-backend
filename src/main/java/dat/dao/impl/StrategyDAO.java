@@ -2,7 +2,7 @@ package dat.dao.impl;
 
 import dat.dao.IDAO;
 import dat.entities.Strategy;
-import dat.entities.StrategyType;
+import dat.entities.enums.StrategyType;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;

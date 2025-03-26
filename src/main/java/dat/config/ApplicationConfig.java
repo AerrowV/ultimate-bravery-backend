@@ -3,8 +3,8 @@ package dat.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dat.controllers.security.AccessController;
 import dat.controllers.security.SecurityController;
+import dat.entities.enums.Role;
 import dat.exceptions.ApiException;
-import dat.exceptions.ApiRuntimeException;
 import dat.utils.Utils;
 import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
@@ -23,7 +23,7 @@ public class ApplicationConfig {
 
     public static void configuration(JavalinConfig config) {
         config.showJavalinBanner = false;
-        config.bundledPlugins.enableRouteOverview("/routes");
+        config.bundledPlugins.enableRouteOverview("/routes", Role.ANYONE);
         config.router.contextPath = "/api"; // base path for all endpoints
 //        config.router.apiBuilder(routes.getRoutes());
 //        config.router.apiBuilder(SecurityRoutes.getSecuredRoutes());
