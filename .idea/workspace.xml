@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5d6322bd-7cb8-4811-8f5e-f5acf75604c7" name="Changes" comment="Added config.properties file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dat/dao/impl/MapDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dat/dao/impl/MapDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/StrategyDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/StrategyDAOTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +62,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "JUnit.All in SP2.executor": "Run",
     "JUnit.GameDAOTest.executor": "Run",
     "JUnit.GameDAOTest.testCreate.executor": "Run",
     "JUnit.GunDAOTest.executor": "Run",
@@ -104,12 +103,11 @@
       <recent name="C:\Users\busin\Documents\F24_Sem3_Programming\SP2_" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.StrategyDAOTest">
-    <configuration name="GunDAOTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.All in SP2">
+    <configuration name="All in SP2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="SP2" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="GunDAOTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -153,11 +151,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in SP2" />
         <item itemvalue="JUnit.StrategyDAOTest" />
         <item itemvalue="JUnit.StrategyDAOTest.testGetRandomByMapAndType" />
         <item itemvalue="JUnit.UserDAOTest" />
         <item itemvalue="JUnit.MapDAOTest" />
-        <item itemvalue="JUnit.GunDAOTest" />
       </list>
     </recent_temporary>
   </component>
