@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5d6322bd-7cb8-4811-8f5e-f5acf75604c7" name="Changes" comment="Added config.properties file">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/DAOTestBase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/GameDAOTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/GunDAOTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/MapDAOTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/StrategyDAOTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/UserDAOTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="dev" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -33,12 +39,12 @@
     &quot;assignee&quot;: &quot;AerrowV&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/AerrowV/SP2_UltimateBravery.git",
-    "accountId": "df1102a9-fdfc-4c30-a1da-e850f57b54ea"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/AerrowV/SP2_UltimateBravery.git&quot;,
+    &quot;accountId&quot;: &quot;df1102a9-fdfc-4c30-a1da-e850f57b54ea&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -49,9 +55,11 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "dev",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/busin/Documents/F24_Sem3_Programming/SP2_",
     "node.js.detected.package.eslint": "true",
@@ -80,11 +88,26 @@
       <recent name="C:\Users\busin\Documents\F24_Sem3_Programming\SP2_" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration name="GameDAOTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SP2" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="GameDAOTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.GameDAOTest" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-125ca727e0f0-intellij.indexing.shared.core-IU-243.24978.46" />
-        <option value="bundled-js-predefined-d6986cc7102b-76f8388c3a79-JavaScript-IU-243.24978.46" />
+        <option value="jdk-22-openjdk-22-4caba194b151-f504ca98" />
       </set>
     </attachedChunks>
   </component>
@@ -102,6 +125,7 @@
       <workItem from="1742904864185" duration="829000" />
       <workItem from="1742905725941" duration="122000" />
       <workItem from="1742905860589" duration="1774000" />
+      <workItem from="1742969786055" duration="868000" />
     </task>
     <task id="LOCAL-00001" summary="Updated StrategyDTO">
       <option name="closed" value="true" />
