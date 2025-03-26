@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d6322bd-7cb8-4811-8f5e-f5acf75604c7" name="Changes" comment="Controller push">
-      <change afterPath="$PROJECT_DIR$/src/main/java/dat/routes/GameRoute.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dat/routes/GunRoute.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dat/routes/Routes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dat/routes/StrategyRoute.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dat/controllers/impl/StrategyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dat/controllers/impl/StrategyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dat/routes/MapRoutes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dat/routes/MapRoute.java" afterDir="false" />
-    </list>
+    <list default="true" id="5d6322bd-7cb8-4811-8f5e-f5acf75604c7" name="Changes" comment="Route push" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -310,7 +302,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742987723370</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Route push">
+      <option name="closed" value="true" />
+      <created>1742988249158</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1742988249158</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -334,6 +334,7 @@
     <MESSAGE value="Added config.properties file" />
     <MESSAGE value="Interface push - controllers" />
     <MESSAGE value="Controller push" />
-    <option name="LAST_COMMIT_MESSAGE" value="Controller push" />
+    <MESSAGE value="Route push" />
+    <option name="LAST_COMMIT_MESSAGE" value="Route push" />
   </component>
 </project>

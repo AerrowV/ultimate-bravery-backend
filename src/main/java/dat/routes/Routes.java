@@ -1,6 +1,7 @@
 package dat.routes;
 
 import io.javalin.apibuilder.EndpointGroup;
+
 import static io.javalin.apibuilder.ApiBuilder.*;
 
 public class Routes {
@@ -13,38 +14,11 @@ public class Routes {
 
     public EndpointGroup getRoutes() {
         return () -> {
-            // Security routes (no authentication required)
-            path("/api", () -> {
-                addSecurityRoutes();
-            });
-
-            // Protected API routes
-            path("/api/protected", () -> {
-                addGameRoutes();
-                addGunRoutes();
-                addMapRoutes();
-                addStrategyRoutes();
-            });
+            path("/games", gameRoute.getRoutes());
+            path("/guns", gunRoute.getRoutes());
+            path("/maps", mapRoute.getRoutes());
+            path("/strategies", strategyRoute.getRoutes());
+            SecurityRoutes.getSecurityRoutes().addEndpoints();
         };
-    }
-
-    private void addSecurityRoutes() {
-        securityRoutes.getSecurityRoutes().addEndpoints();
-    }
-
-    private void addGameRoutes() {
-        path("/games", gameRoute.getRoutes());
-    }
-
-    private void addGunRoutes() {
-        path("/guns", gunRoute.getRoutes());
-    }
-
-    private void addMapRoutes() {
-        path("/maps", mapRoute.getRoutes());
-    }
-
-    private void addStrategyRoutes() {
-        path("/strategies", strategyRoute.getRoutes());
     }
 }
