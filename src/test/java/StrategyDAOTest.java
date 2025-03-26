@@ -33,7 +33,7 @@ class StrategyDAOTest extends DAOTestBase {
         testStrategy.setDescription("Competitive play");
         testStrategy.setType(StrategyType.SERIOUS);
         testStrategy.getMaps().add(testMap);
-        strategyDAO.create(testStrategy); // Use DAO consistently
+        strategyDAO.create(testStrategy);
 
         testMap.getStrategies().add(testStrategy);
         mapDAO.update(testMap.getId(), testMap);
@@ -74,7 +74,7 @@ class StrategyDAOTest extends DAOTestBase {
         Strategy serious2 = createTestStrategy("Serious 2", StrategyType.SERIOUS);
         Strategy troll = createTestStrategy("Troll", StrategyType.TROLL);
 
-        testMap = mapDAO.readWithStrategies(testMap.getId()); // You'll need to implement this method
+        testMap = mapDAO.readWithStrategies(testMap.getId());
         assertEquals(4, testMap.getStrategies().size());
 
         for (int i = 0; i < 10; i++) {
