@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import dat.exceptions.ApiException;
+import dat.exceptions.ApiRuntimeException;
 import io.javalin.http.Context;
 
 import java.io.IOException;
@@ -28,11 +28,11 @@ public class Utils {
             if (value != null) {
                 return value.trim();  // Trim whitespace
             } else {
-                throw new ApiException(500, String.format("Property %s not found in %s", propName, resourceName));
+                throw new ApiRuntimeException(500, String.format("Property %s not found in %s", propName, resourceName));
             }
         } catch (IOException ex) {
             ex.printStackTrace();
-            throw new ApiException(500, String.format("Could not read property %s. Did you remember to build the project with MAVEN?", propName));
+            throw new ApiRuntimeException(500, String.format("Could not read property %s. Did you remember to build the project with MAVEN?", propName));
         }
     }
 

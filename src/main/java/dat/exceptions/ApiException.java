@@ -1,15 +1,15 @@
 package dat.exceptions;
 
-public class ApiException extends RuntimeException {
+public class ApiException extends Exception{
 
-    private int errorCode;
+    private final int statusCode;
 
-    public ApiException(int errorCode, String message) {
+    public ApiException(int statusCode, String message) {
         super(message);
-        this.errorCode = errorCode;
+        this.statusCode = statusCode;
     }
 
-    public int getErrorCode() {
-        return errorCode;
+    public int getStatusCode() {
+        return statusCode;
     }
 }

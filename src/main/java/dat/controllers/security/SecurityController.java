@@ -2,13 +2,12 @@ package dat.controllers.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.nimbusds.jose.JOSEException;
 import dat.utils.Utils;
 import dat.config.HibernateConfig;
 import dat.dao.security.ISecurityDAO;
 import dat.dao.security.SecurityDAO;
 import dat.entities.User;
-import dat.exceptions.ApiException;
+import dat.exceptions.ApiRuntimeException;
 import dat.exceptions.NotAuthorizedException;
 import dat.exceptions.ValidationException;
 import dk.bugelhartmann.ITokenSecurity;
@@ -155,7 +154,7 @@ public class SecurityController implements ISecurityController {
             return tokenSecurity.createToken(user, ISSUER, TOKEN_EXPIRE_TIME, SECRET_KEY);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new ApiException(500, "Could not create token");
+            throw new ApiRuntimeException(500, "Could not create token");
         }
     }
 
@@ -172,7 +171,7 @@ public class SecurityController implements ISecurityController {
             }
         } catch (ParseException | NotAuthorizedException | TokenVerificationException e) {
             e.printStackTrace();
-            throw new ApiException(HttpStatus.UNAUTHORIZED.getCode(), "Unauthorized. Could not verify token");
+            throw new ApiRuntimeException(HttpStatus.UNAUTHORIZED.getCode(), "Unauthorized. Could not verify token");
         }
     }
 

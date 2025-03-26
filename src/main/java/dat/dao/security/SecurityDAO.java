@@ -2,7 +2,7 @@ package dat.dao.security;
 
 import dat.entities.Role;
 import dat.entities.User;
-import dat.exceptions.ApiException;
+import dat.exceptions.ApiRuntimeException;
 import dat.exceptions.ValidationException;
 import dk.bugelhartmann.UserDTO;
 import jakarta.persistence.EntityExistsException;
@@ -10,7 +10,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityNotFoundException;
 
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class SecurityDAO implements ISecurityDAO {
@@ -57,7 +56,7 @@ public class SecurityDAO implements ISecurityDAO {
             return userEntity;
         }catch (Exception e){
             e.printStackTrace();
-            throw new ApiException(400, e.getMessage());
+            throw new ApiRuntimeException(400, e.getMessage());
         }
     }
 
