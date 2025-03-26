@@ -1,24 +1,13 @@
 package dat.dtos;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.util.List;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class GameDTO {
     private Long id;
     private String name;
-
-    private List<Long> mapIds;
-    private List<Long> gunIds;
-
-    public GameDTO() {
-    }
-
-    public GameDTO(Long id, String name, List<Long> mapIds, List<Long> gunIds) {
-        this.id = id;
-        this.name = name;
-        this.mapIds = mapIds;
-        this.gunIds = gunIds;
-    }
 }

@@ -35,7 +35,8 @@ public class StrategyDAO implements IDAO<Strategy, Long> {
     @Override
     public List<Strategy> readAll() {
         try (EntityManager em = emf.createEntityManager()) {
-            TypedQuery<Strategy> query = em.createQuery("SELECT s FROM Strategy s", Strategy.class);
+            TypedQuery<Strategy> query = em.createQuery(
+                    "SELECT s FROM Strategy s LEFT JOIN FETCH s.maps", Strategy.class);
             return query.getResultList();
         }
     }
@@ -81,10 +82,23 @@ public class StrategyDAO implements IDAO<Strategy, Long> {
         }
     }
 
+    public List<Strategy> getByMapId(Long mapId) {
+        try (EntityManager em = emf.createEntityManager()) {
+            // Use JOIN FETCH to eagerly load the maps collection just for this query
+            TypedQuery<Strategy> query = em.createQuery(
+                    "SELECT s FROM Strategy s LEFT JOIN FETCH s.maps m WHERE m.id = :mapId", Strategy.class
+            );
+            query.setParameter("mapId", mapId);
+            return query.getResultList();
+        }
+    }
+
+
     public Strategy getRandomByMapAndType(Long mapId, StrategyType type) {
         try (EntityManager em = emf.createEntityManager()) {
+            // Use JOIN FETCH to eagerly load the maps collection just for this query
             TypedQuery<Strategy> query = em.createQuery(
-                    "SELECT s FROM Strategy s JOIN s.maps m WHERE m.id = :mapId AND s.type = :type",
+                    "SELECT s FROM Strategy s LEFT JOIN FETCH s.maps m WHERE m.id = :mapId AND s.type = :type",
                     Strategy.class
             );
             query.setParameter("mapId", mapId);
@@ -97,14 +111,4 @@ public class StrategyDAO implements IDAO<Strategy, Long> {
         }
     }
 
-    public List<Strategy> getByMapId(Long mapId) {
-        try (EntityManager em = emf.createEntityManager()) {
-            TypedQuery<Strategy> query = em.createQuery(
-                    "SELECT s FROM Strategy s JOIN s.maps m WHERE m.id = :mapId",
-                    Strategy.class
-            );
-            query.setParameter("mapId", mapId);
-            return query.getResultList();
-        }
-    }
 }

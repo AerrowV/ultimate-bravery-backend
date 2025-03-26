@@ -8,7 +8,7 @@ import dat.dtos.StrategyDTO;
 import dat.entities.Map;
 import dat.entities.Strategy;
 import dat.entities.enums.StrategyType;
-import dat.entities.enums.StrategyType;
+import dat.services.mappers.StrategyMapper;
 import io.javalin.http.Context;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -37,7 +37,7 @@ public class StrategyController implements IController<StrategyDTO, Long> {
 
         Strategy strategy = strategyDao.read(id);
         if (strategy != null) {
-            ctx.status(200).json(convertToDTO(strategy));
+            ctx.status(200).json(StrategyMapper.toDTO(strategy));
         } else {
             ctx.status(404);
         }
@@ -46,16 +46,16 @@ public class StrategyController implements IController<StrategyDTO, Long> {
     @Override
     public void readAll(Context ctx) {
         ctx.status(200).json(strategyDao.readAll().stream()
-                .map(this::convertToDTO)
+                .map(StrategyMapper::toDTO)
                 .toList());
     }
 
     @Override
     public void create(Context ctx) {
         StrategyDTO strategyDTO = validateEntity(ctx);
-        Strategy strategy = convertToEntity(strategyDTO);
+        Strategy strategy = StrategyMapper.toEntity(strategyDTO);
         Strategy createdStrategy = strategyDao.create(strategy);
-        ctx.status(201).json(convertToDTO(createdStrategy));
+        ctx.status(201).json(StrategyMapper.toDTO(createdStrategy));
     }
 
     @Override
@@ -80,7 +80,7 @@ public class StrategyController implements IController<StrategyDTO, Long> {
         updateRelationships(existing, strategyDTO);
 
         Strategy updatedStrategy = strategyDao.update(id, existing);
-        ctx.status(200).json(convertToDTO(updatedStrategy));
+        ctx.status(200).json(StrategyMapper.toDTO(updatedStrategy));
     }
 
     @Override
@@ -120,7 +120,7 @@ public class StrategyController implements IController<StrategyDTO, Long> {
         Strategy randomStrategy = strategyDao.getRandomByMapAndType(mapId, type);
 
         if (randomStrategy != null) {
-            ctx.status(200).json(convertToDTO(randomStrategy));
+            ctx.status(200).json(StrategyMapper.toDTO(randomStrategy));
         } else {
             ctx.status(404);
         }
@@ -132,7 +132,7 @@ public class StrategyController implements IController<StrategyDTO, Long> {
                 .get();
 
         List<StrategyDTO> strategies = strategyDao.getByMapId(mapId).stream()
-                .map(this::convertToDTO)
+                .map(StrategyMapper::toDTO)
                 .toList();
         ctx.status(200).json(strategies);
     }
@@ -144,44 +144,6 @@ public class StrategyController implements IController<StrategyDTO, Long> {
         } catch (IllegalArgumentException e) {
             return false;
         }
-    }
-
-    private StrategyDTO convertToDTO(Strategy strategy) {
-        return new StrategyDTO(
-                strategy.getId(),
-                strategy.getTitle(),
-                strategy.getDescription(),
-                strategy.isTeamId(),
-                strategy.getType().name(),
-                strategy.getMaps() != null ?
-                        strategy.getMaps().stream().map(Map::getId).collect(Collectors.toList()) :
-                        List.of()
-        );
-    }
-
-    private Strategy convertToEntity(StrategyDTO dto) {
-        Strategy strategy = new Strategy();
-        strategy.setTitle(dto.getTitle());
-        strategy.setDescription(dto.getDescription());
-        strategy.setTeamId(dto.isTeamId());
-        strategy.setType(StrategyType.valueOf(dto.getType()));
-
-        try (EntityManager em = emf.createEntityManager()) {
-            em.getTransaction().begin();
-
-            if (!dto.getMapIds().isEmpty()) {
-                Set<Map> maps = em.createQuery(
-                                "SELECT m FROM Map m WHERE m.id IN :ids", Map.class)
-                        .setParameter("ids", dto.getMapIds())
-                        .getResultStream()
-                        .collect(Collectors.toSet());
-                strategy.setMaps(maps);
-            }
-
-            em.getTransaction().commit();
-        }
-
-        return strategy;
     }
 
     private void updateRelationships(Strategy strategy, StrategyDTO dto) {

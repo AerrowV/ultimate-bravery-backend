@@ -33,8 +33,8 @@ public class GameDAO implements IDAO<Game, Long> {
     @Override
     public List<Game> readAll() {
         try (EntityManager em = emf.createEntityManager()) {
-            TypedQuery<Game> query = em.createQuery("SELECT g FROM Game g", Game.class);
-            return query.getResultList();
+            return em.createQuery("SELECT g FROM Game g", Game.class)
+                    .getResultList();
         }
     }
 
