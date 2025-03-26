@@ -18,7 +18,7 @@ public class Routes {
             path("/guns", gunRoute.getRoutes());
             path("/maps", mapRoute.getRoutes());
             path("/strategies", strategyRoute.getRoutes());
-//            SecurityRoutes.getSecurityRoutes().addEndpoints();
+            SecurityRoutes.getSecurityRoutes().addEndpoints();
         };
     }
 }
