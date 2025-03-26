@@ -135,7 +135,7 @@ public class StrategyController implements IController<StrategyDTO, Long> {
         ctx.status(200).json(strategies);
     }
 
-    private boolean isValidStrategyType(String type) {
+    public boolean isValidStrategyType(String type) {
         try {
             StrategyType.valueOf(type);
             return true;

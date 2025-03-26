@@ -4,12 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d6322bd-7cb8-4811-8f5e-f5acf75604c7" name="Changes" comment="Interface push - controllers">
-      <change afterPath="$PROJECT_DIR$/src/main/java/dat/controllers/impl/GameController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dat/controllers/impl/GunController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dat/controllers/impl/MapController.java" afterDir="false" />
+    <list default="true" id="5d6322bd-7cb8-4811-8f5e-f5acf75604c7" name="Changes" comment="Controller push">
+      <change afterPath="$PROJECT_DIR$/src/main/java/dat/routes/GameRoute.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dat/routes/GunRoute.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dat/routes/Routes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/dat/routes/StrategyRoute.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dat/controllers/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dat/controllers/impl/AccountController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dat/controllers/impl/StrategyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dat/controllers/impl/StrategyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dat/routes/MapRoutes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dat/routes/MapRoute.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -292,7 +294,23 @@
       <option name="project" value="LOCAL" />
       <updated>1742986274231</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Controller push">
+      <option name="closed" value="true" />
+      <created>1742987586268</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1742987586268</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Controller push">
+      <option name="closed" value="true" />
+      <created>1742987723370</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1742987723370</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -315,6 +333,7 @@
     <MESSAGE value="Added Dockerfile and workflow.yml" />
     <MESSAGE value="Added config.properties file" />
     <MESSAGE value="Interface push - controllers" />
-    <option name="LAST_COMMIT_MESSAGE" value="Interface push - controllers" />
+    <MESSAGE value="Controller push" />
+    <option name="LAST_COMMIT_MESSAGE" value="Controller push" />
   </component>
 </project>
