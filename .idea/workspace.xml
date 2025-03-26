@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5d6322bd-7cb8-4811-8f5e-f5acf75604c7" name="Changes" comment="Added config.properties file">
-      <change afterPath="$PROJECT_DIR$/src/test/java/DAOTestBase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/GameDAOTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/GunDAOTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/MapDAOTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/StrategyDAOTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/UserDAOTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dat/dao/impl/MapDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dat/dao/impl/MapDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/StrategyDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/StrategyDAOTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +22,19 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="REMOTE">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="origin/dev" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="master" />
@@ -55,6 +64,13 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "JUnit.GameDAOTest.executor": "Run",
+    "JUnit.GameDAOTest.testCreate.executor": "Run",
+    "JUnit.GunDAOTest.executor": "Run",
+    "JUnit.MapDAOTest.executor": "Run",
+    "JUnit.StrategyDAOTest.executor": "Run",
+    "JUnit.StrategyDAOTest.testGetRandomByMapAndType.executor": "Run",
+    "JUnit.UserDAOTest.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -88,11 +104,48 @@
       <recent name="C:\Users\busin\Documents\F24_Sem3_Programming\SP2_" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="GameDAOTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.StrategyDAOTest">
+    <configuration name="GunDAOTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="SP2" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="GameDAOTest" />
+      <option name="MAIN_CLASS_NAME" value="GunDAOTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MapDAOTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SP2" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="MapDAOTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StrategyDAOTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SP2" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="StrategyDAOTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StrategyDAOTest.testGetRandomByMapAndType" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SP2" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="StrategyDAOTest" />
+      <option name="METHOD_NAME" value="testGetRandomByMapAndType" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserDAOTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SP2" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="UserDAOTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -100,14 +153,18 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.GameDAOTest" />
+        <item itemvalue="JUnit.StrategyDAOTest" />
+        <item itemvalue="JUnit.StrategyDAOTest.testGetRandomByMapAndType" />
+        <item itemvalue="JUnit.UserDAOTest" />
+        <item itemvalue="JUnit.MapDAOTest" />
+        <item itemvalue="JUnit.GunDAOTest" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-22-openjdk-22-4caba194b151-f504ca98" />
+        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-5cd809f4" />
       </set>
     </attachedChunks>
   </component>
@@ -126,6 +183,7 @@
       <workItem from="1742905725941" duration="122000" />
       <workItem from="1742905860589" duration="1774000" />
       <workItem from="1742969786055" duration="868000" />
+      <workItem from="1742977593375" duration="1412000" />
     </task>
     <task id="LOCAL-00001" summary="Updated StrategyDTO">
       <option name="closed" value="true" />

@@ -78,4 +78,14 @@ public class MapDAO implements IDAO<Map, Long> {
             em.getTransaction().commit();
         }
     }
+    public Map readWithStrategies(Long id) {
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<Map> query = em.createQuery(
+                    "SELECT DISTINCT m FROM Map m LEFT JOIN FETCH m.strategies WHERE m.id = :id",
+                    Map.class
+            );
+            query.setParameter("id", id);
+            return query.getSingleResult();
+        }
+    }
 }

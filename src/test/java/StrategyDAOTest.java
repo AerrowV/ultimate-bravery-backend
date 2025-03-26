@@ -23,19 +23,20 @@ class StrategyDAOTest extends DAOTestBase {
     void setUp() {
         strategyDAO = StrategyDAO.getInstance(emf);
         mapDAO = MapDAO.getInstance(emf);
+
         testMap = new Map();
         testMap.setName("Test Map");
         mapDAO.create(testMap);
+
         testStrategy = new Strategy();
         testStrategy.setTitle("Serious Strategy");
         testStrategy.setDescription("Competitive play");
         testStrategy.setType(StrategyType.SERIOUS);
         testStrategy.getMaps().add(testMap);
-        try (EntityManager em = emf.createEntityManager()) {
-            em.getTransaction().begin();
-            em.persist(testStrategy);
-            em.getTransaction().commit();
-        }
+        strategyDAO.create(testStrategy); // Use DAO consistently
+
+        testMap.getStrategies().add(testStrategy);
+        mapDAO.update(testMap.getId(), testMap);
     }
 
     @Test
@@ -68,13 +69,17 @@ class StrategyDAOTest extends DAOTestBase {
 
     @Test
     void testGetRandomByMapAndType() {
+
         Strategy serious1 = createTestStrategy("Serious 1", StrategyType.SERIOUS);
         Strategy serious2 = createTestStrategy("Serious 2", StrategyType.SERIOUS);
         Strategy troll = createTestStrategy("Troll", StrategyType.TROLL);
 
+        testMap = mapDAO.readWithStrategies(testMap.getId()); // You'll need to implement this method
+        assertEquals(4, testMap.getStrategies().size());
+
         for (int i = 0; i < 10; i++) {
             Strategy random = strategyDAO.getRandomByMapAndType(testMap.getId(), StrategyType.SERIOUS);
-            assertNotNull(random);
+            assertNotNull(random, "Should never return null when SERIOUS strategies exist");
             assertEquals(StrategyType.SERIOUS, random.getType());
             assertTrue(List.of("Serious Strategy", "Serious 1", "Serious 2").contains(random.getTitle()));
         }
@@ -82,6 +87,7 @@ class StrategyDAOTest extends DAOTestBase {
         Strategy shouldBeNull = strategyDAO.getRandomByMapAndType(testMap.getId(), StrategyType.AVERAGE);
         assertNull(shouldBeNull);
     }
+
 
     @Test
     void testGetByMapIdWithDifferentTypes() {
@@ -103,6 +109,12 @@ class StrategyDAOTest extends DAOTestBase {
         s.setDescription("Test " + type);
         s.setType(type);
         s.getMaps().add(testMap);
-        return strategyDAO.create(s);
+
+        Strategy created = strategyDAO.create(s);
+
+        testMap.getStrategies().add(created);
+        mapDAO.update(testMap.getId(), testMap);
+
+        return created;
     }
 }
