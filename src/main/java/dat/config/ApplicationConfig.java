@@ -5,6 +5,7 @@ import dat.controllers.security.AccessController;
 import dat.controllers.security.SecurityController;
 import dat.entities.enums.Role;
 import dat.exceptions.ApiException;
+import dat.routes.Routes;
 import dat.utils.Utils;
 import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
@@ -18,6 +19,7 @@ public class ApplicationConfig {
     private static SecurityController securityController = SecurityController.getInstance();
     private static AccessController accessController = new AccessController();
     private static Logger logger = LoggerFactory.getLogger(ApplicationConfig.class);
+    private static Routes routes = new Routes();
     private static int count = 1;
 
 
@@ -25,7 +27,7 @@ public class ApplicationConfig {
         config.showJavalinBanner = false;
         config.bundledPlugins.enableRouteOverview("/routes", Role.ANYONE);
         config.router.contextPath = "/api"; // base path for all endpoints
-//        config.router.apiBuilder(routes.getRoutes());
+        config.router.apiBuilder(routes.getRoutes());
 //        config.router.apiBuilder(SecurityRoutes.getSecuredRoutes());
 //        config.router.apiBuilder(SecurityRoutes.getSecurityRoutes());
     }
