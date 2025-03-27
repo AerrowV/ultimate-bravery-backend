@@ -93,9 +93,7 @@ Authorization: Bearer {{jwt_token}}
 Content-Type: application/json
 
 {
-  "name": "Counter-Strike 2",
-  "mapIds": [1, 2],
-  "gunIds": [1, 3]
+  "name": "Counter-Strike 3"
 }
 
 > {%
@@ -111,9 +109,7 @@ Authorization: Bearer {{jwt_token}}
 Content-Type: application/json
 
 {
-  "name": "CS2 Updated",
-  "mapIds": [1, 2, 3],
-  "gunIds": [1, 2, 3]
+  "name": "CS2 Updated"
 }
 
 > {%
