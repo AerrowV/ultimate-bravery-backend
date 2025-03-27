@@ -16,7 +16,6 @@ public class MapRoute {
             post("/", mapController::create);
             put("/{id}", mapController::update);
             delete("/{id}", mapController::delete);
-            get("/{id}/with-strategies", mapController::readWithStrategies);
         };
     }
 }
