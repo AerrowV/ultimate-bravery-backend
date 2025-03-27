@@ -1,20 +1,17 @@
 package dat.controllers.impl;
 
 import dat.config.HibernateConfig;
+import dat.config.Populate;
 import dat.controllers.IController;
 import dat.dao.impl.GameDAO;
 import dat.dtos.GameDTO;
 import dat.entities.Game;
-import dat.entities.Gun;
-import dat.entities.Map;
 import dat.services.mappers.GameMapper;
 import io.javalin.http.Context;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class GameController implements IController<GameDTO, Long> {
@@ -119,5 +116,10 @@ public class GameController implements IController<GameDTO, Long> {
                     .getResultList();
             ctx.status(200).json(games.stream().map(GameMapper::toDTO).collect(Collectors.toList()));
         }
+    }
+
+    public void populate(Context ctx) {
+        Populate.populate(HibernateConfig.getEntityManagerFactory());
+        ctx.result("Populated database with game, maps, guns, and strategies.");
     }
 }

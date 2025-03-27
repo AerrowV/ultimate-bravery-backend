@@ -3,8 +3,6 @@ package dat.services.mappers;
 import dat.dtos.GameDTO;
 import dat.entities.Game;
 
-import java.util.stream.Collectors;
-
 public class GameMapper {
 
     public static GameDTO toDTO(Game game) {

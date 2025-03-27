@@ -4,6 +4,7 @@ import dat.dao.IDAO;
 import dat.entities.Map;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import lombok.NoArgsConstructor;
 
@@ -30,6 +31,8 @@ public class MapDAO implements IDAO<Map, Long> {
                             "SELECT m FROM Map m LEFT JOIN FETCH m.strategies WHERE m.id = :id", Map.class)
                     .setParameter("id", id)
                     .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
         }
     }
 
@@ -80,16 +83,6 @@ public class MapDAO implements IDAO<Map, Long> {
                 em.remove(map);
             }
             em.getTransaction().commit();
-        }
-    }
-
-    public Map readWithStrategies(Long id) {
-        try (EntityManager em = emf.createEntityManager()) {
-            TypedQuery<Map> query = em.createQuery(
-                    "SELECT m FROM Map m LEFT JOIN FETCH m.strategies WHERE m.id = :id", Map.class
-            );
-            query.setParameter("id", id);
-            return query.getSingleResult();
         }
     }
 }

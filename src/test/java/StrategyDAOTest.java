@@ -73,7 +73,7 @@ class StrategyDAOTest extends DAOTestBase {
         Strategy serious2 = createTestStrategy("Serious 2", StrategyType.SERIOUS);
         Strategy troll = createTestStrategy("Troll", StrategyType.TROLL);
 
-        testMap = mapDAO.readWithStrategies(testMap.getId());
+        testMap = mapDAO.read(testMap.getId());
         assertEquals(4, testMap.getStrategies().size());
 
         for (int i = 0; i < 10; i++) {

@@ -1,6 +1,7 @@
 package dat.routes;
 
 import dat.controllers.impl.MapController;
+import dat.entities.enums.Role;
 import io.javalin.apibuilder.EndpointGroup;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
@@ -13,10 +14,9 @@ public class MapRoute {
         return () -> {
             get("/", mapController::readAll);
             get("/{id}", mapController::read);
-            post("/", mapController::create);
-            put("/{id}", mapController::update);
-            delete("/{id}", mapController::delete);
-            get("/{id}/with-strategies", mapController::readWithStrategies);
+            post("/", mapController::create, Role.ADMIN);
+            put("/{id}", mapController::update, Role.ADMIN);
+            delete("/{id}", mapController::delete, Role.ADMIN);
         };
     }
 }

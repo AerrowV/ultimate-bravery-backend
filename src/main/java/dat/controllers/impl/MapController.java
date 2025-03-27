@@ -5,16 +5,15 @@ import dat.controllers.IController;
 import dat.dao.impl.GameDAO;
 import dat.dao.impl.MapDAO;
 import dat.dao.impl.StrategyDAO;
-import dat.services.mappers.MapMapper;
 import dat.dtos.MapDTO;
 import dat.entities.Game;
 import dat.entities.Map;
 import dat.entities.Strategy;
+import dat.services.mappers.MapMapper;
 import io.javalin.http.Context;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -103,19 +102,6 @@ public class MapController implements IController<MapDTO, Long> {
                 .check(m -> m.getGameId() != null, "Game ID must be provided")
                 .check(m -> m.getStrategyIds() != null, "Strategy IDs must be provided")
                 .get();
-    }
-
-    public void readWithStrategies(Context ctx) {
-        Long id = ctx.pathParamAsClass("id", Long.class)
-                .check(this::validatePrimaryKey, "Not a valid id")
-                .get();
-
-        Map map = mapDao.readWithStrategies(id);
-        if (map != null) {
-            ctx.status(200).json(MapMapper.toDTO(map));
-        } else {
-            ctx.status(404);
-        }
     }
 
 
