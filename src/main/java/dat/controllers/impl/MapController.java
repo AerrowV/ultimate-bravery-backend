@@ -104,19 +104,6 @@ public class MapController implements IController<MapDTO, Long> {
                 .get();
     }
 
-    public void readWithStrategies(Context ctx) {
-        Long id = ctx.pathParamAsClass("id", Long.class)
-                .check(this::validatePrimaryKey, "Not a valid id")
-                .get();
-
-        Map map = mapDao.readWithStrategies(id);
-        if (map != null) {
-            ctx.status(200).json(MapMapper.toDTO(map));
-        } else {
-            ctx.status(404);
-        }
-    }
-
 
     private void updateRelationships(Map map, MapDTO dto) {
         try (EntityManager em = emf.createEntityManager()) {
