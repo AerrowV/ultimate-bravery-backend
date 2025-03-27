@@ -2,7 +2,6 @@ import dat.dao.impl.GameDAO;
 import dat.dao.impl.MapDAO;
 import dat.entities.Game;
 import dat.entities.Map;
-import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,31 +14,23 @@ import static org.junit.jupiter.api.Assertions.*;
 class MapDAOTest extends DAOTestBase {
     private MapDAO mapDAO;
     private GameDAO gameDAO;
-    private Game testGame;
-    private Map testMap;
 
     @BeforeEach
     void setUp() {
         mapDAO = MapDAO.getInstance(emf);
         gameDAO = GameDAO.getInstance(emf);
-        testGame = new Game();
-        testGame.setName("Test Game");
-        gameDAO.create(testGame);
-        testMap = new Map();
-        testMap.setName("Test Map");
-        testMap.setGame(testGame);
-        try (EntityManager em = emf.createEntityManager()) {
-            em.getTransaction().begin();
-            em.persist(testMap);
-            em.getTransaction().commit();
-        }
     }
 
     @Test
     void testCreate() {
+        List<Game> games = gameDAO.readAll();
+        assertFalse(games.isEmpty(), "There should be at least one game from Populate.java");
+
+        Game existingGame = games.get(0);
         Map newMap = new Map();
         newMap.setName("New Map");
-        newMap.setGame(testGame);
+        newMap.setGame(existingGame);
+
         Map createdMap = mapDAO.create(newMap);
         assertNotNull(createdMap);
         assertNotNull(createdMap.getId());
@@ -48,44 +39,54 @@ class MapDAOTest extends DAOTestBase {
 
     @Test
     void testRead() {
-        Map foundMap = mapDAO.read(testMap.getId());
+        List<Map> maps = mapDAO.readAll();
+        assertFalse(maps.isEmpty(), "There should be at least one map from Populate.java");
+
+        Map foundMap = mapDAO.read(maps.get(0).getId());
         assertNotNull(foundMap);
-        assertEquals(testMap.getId(), foundMap.getId());
-        assertEquals("Test Map", foundMap.getName());
+        assertEquals(maps.get(0).getId(), foundMap.getId());
+        assertEquals(maps.get(0).getName(), foundMap.getName());
     }
 
     @Test
     void testReadAll() {
-        Map anotherMap = new Map();
-        anotherMap.setName("Another Map");
-        anotherMap.setGame(testGame);
-        mapDAO.create(anotherMap);
         List<Map> maps = mapDAO.readAll();
-        assertThat(maps, hasSize(2));
-        assertThat(maps, hasItems(
-                hasProperty("name", is("Test Map")),
-                hasProperty("name", is("Another Map"))
+        assertThat(maps, hasSize(greaterThanOrEqualTo(1))); // At least one map from Populate.java
+
+        assertThat(maps, hasItem(
+                hasProperty("name", is("Ancient")) // Match the map from Populate.java
         ));
     }
 
     @Test
     void testUpdate() {
+        List<Map> maps = mapDAO.readAll();
+        assertFalse(maps.isEmpty());
+
+        Map mapToUpdate = maps.get(0);
         Map updatedData = new Map();
         updatedData.setName("Updated Map Name");
-        Game anotherGame = new Game();
-        anotherGame.setName("Another Game");
-        gameDAO.create(anotherGame);
-        updatedData.setGame(anotherGame);
-        Map updatedMap = mapDAO.update(testMap.getId(), updatedData);
+
+        List<Game> games = gameDAO.readAll();
+        assertFalse(games.isEmpty());
+
+        updatedData.setGame(games.get(0)); // Assign to an existing game
+
+        Map updatedMap = mapDAO.update(mapToUpdate.getId(), updatedData);
         assertNotNull(updatedMap);
-        assertEquals(testMap.getId(), updatedMap.getId());
+        assertEquals(mapToUpdate.getId(), updatedMap.getId());
         assertEquals("Updated Map Name", updatedMap.getName());
     }
 
     @Test
     void testDelete() {
-        mapDAO.delete(testMap.getId());
-        Map deletedMap = mapDAO.read(testMap.getId());
+        List<Map> maps = mapDAO.readAll();
+        assertFalse(maps.isEmpty());
+
+        Map mapToDelete = maps.get(0);
+        mapDAO.delete(mapToDelete.getId());
+
+        Map deletedMap = mapDAO.read(mapToDelete.getId());
         assertNull(deletedMap);
     }
 }

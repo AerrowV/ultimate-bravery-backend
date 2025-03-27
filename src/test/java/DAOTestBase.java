@@ -1,10 +1,8 @@
 import dat.config.HibernateConfig;
+import dat.config.Populate;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class DAOTestBase {
@@ -20,9 +18,12 @@ public class DAOTestBase {
 
     @AfterAll
     static void tearDownAll() {
+        if (emf != null && emf.isOpen()) {
+            emf.close();
+        }
     }
 
-    @AfterEach
+    @BeforeEach
     void cleanDatabase() {
         if (emf != null && emf.isOpen()) {
             try (EntityManager em = emf.createEntityManager()) {
@@ -38,5 +39,7 @@ public class DAOTestBase {
                 e.printStackTrace();
             }
         }
+
+        Populate.populate(emf);
     }
 }

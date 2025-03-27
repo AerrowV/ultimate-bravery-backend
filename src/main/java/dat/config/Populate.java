@@ -23,8 +23,10 @@ public class Populate {
 
             Strategy strategy1 = new Strategy("Mid fake", "2 terrorist push mid with flash, the rest waits in b doors until attention is mid, then rush up b ramp.", false, StrategyType.SERIOUS);
             Strategy strategy2 = new Strategy("B split(Cave push)", "First 4 terrorist push cave, 1 waits ramp for them to crunch 'B' site at the same time.", false, StrategyType.AVERAGE);
+            Strategy strategy3 = new Strategy("Just for the lols", "Gotta take a gun and do the shooty shoot", false, StrategyType.TROLL);
             em.persist(strategy1);
             em.persist(strategy2);
+            em.persist(strategy3);
 
             Map map1 = new Map("Ancient", game1);
             Map map2 = new Map("Inferno", game1);
@@ -33,9 +35,11 @@ public class Populate {
 
             map1.getStrategies().add(strategy1);
             map1.getStrategies().add(strategy2);
+            map1.getStrategies().add(strategy3);
 
             strategy1.getMaps().add(map1);
             strategy2.getMaps().add(map1);
+            strategy3.getMaps().add(map1);
 
             Gun gun1 = new Gun("AK-47", false, game1);
             em.persist(gun1);

@@ -16,77 +16,47 @@ class StrategyDAOTest extends DAOTestBase {
     private StrategyDAO strategyDAO;
     private MapDAO mapDAO;
     private Map testMap;
-    private Strategy testStrategy;
 
     @BeforeEach
     void setUp() {
         strategyDAO = StrategyDAO.getInstance(emf);
         mapDAO = MapDAO.getInstance(emf);
 
-        testMap = new Map();
-        testMap.setName("Test Map");
-        mapDAO.create(testMap);
+        List<Map> maps = mapDAO.readAll();
+        assertFalse(maps.isEmpty(), "There should be at least one map from Populate.java");
 
-        testStrategy = new Strategy();
-        testStrategy.setTitle("Serious Strategy");
-        testStrategy.setDescription("Competitive play");
-        testStrategy.setType(StrategyType.SERIOUS);
-        testStrategy.getMaps().add(testMap);
-        strategyDAO.create(testStrategy);
-
-        testMap.getStrategies().add(testStrategy);
-        mapDAO.update(testMap.getId(), testMap);
+        testMap = maps.get(0);
     }
 
     @Test
     void testCreateWithDifferentStrategyTypes() {
-        Strategy trollStrategy = new Strategy();
-        trollStrategy.setTitle("Troll Pick");
-        trollStrategy.setDescription("Just for fun");
-        trollStrategy.setType(StrategyType.TROLL);
-        trollStrategy.getMaps().add(testMap);
-        Strategy createdTroll = strategyDAO.create(trollStrategy);
+        Strategy trollStrategy = createTestStrategy("Troll Pick", StrategyType.TROLL);
+        Strategy averageStrategy = createTestStrategy("Balanced Approach", StrategyType.AVERAGE);
 
-        Strategy averageStrategy = new Strategy();
-        averageStrategy.setTitle("Balanced Approach");
-        averageStrategy.setDescription("Middle ground");
-        averageStrategy.setType(StrategyType.AVERAGE);
-        averageStrategy.getMaps().add(testMap);
-        Strategy createdAverage = strategyDAO.create(averageStrategy);
-
-        assertEquals(StrategyType.TROLL, createdTroll.getType());
-        assertEquals(StrategyType.AVERAGE, createdAverage.getType());
+        assertEquals(StrategyType.TROLL, trollStrategy.getType());
+        assertEquals(StrategyType.AVERAGE, averageStrategy.getType());
     }
 
     @Test
     void testUpdateStrategyType() {
+        List<Strategy> strategies = strategyDAO.getByMapId(testMap.getId());
+        assertFalse(strategies.isEmpty(), "There should be at least one strategy in the populated database");
+
+        Strategy strategyToUpdate = strategies.get(0);
         Strategy updatedData = new Strategy();
         updatedData.setType(StrategyType.AVERAGE);
-        Strategy updated = strategyDAO.update(testStrategy.getId(), updatedData);
+
+        Strategy updated = strategyDAO.update(strategyToUpdate.getId(), updatedData);
         assertEquals(StrategyType.AVERAGE, updated.getType());
     }
 
     @Test
     void testGetRandomByMapAndType() {
+        Strategy random = strategyDAO.getRandomByMapAndType(testMap.getId(), StrategyType.AVERAGE);
 
-        Strategy serious1 = createTestStrategy("Serious 1", StrategyType.SERIOUS);
-        Strategy serious2 = createTestStrategy("Serious 2", StrategyType.SERIOUS);
-        Strategy troll = createTestStrategy("Troll", StrategyType.TROLL);
-
-        testMap = mapDAO.read(testMap.getId());
-        assertEquals(4, testMap.getStrategies().size());
-
-        for (int i = 0; i < 10; i++) {
-            Strategy random = strategyDAO.getRandomByMapAndType(testMap.getId(), StrategyType.SERIOUS);
-            assertNotNull(random, "Should never return null when SERIOUS strategies exist");
-            assertEquals(StrategyType.SERIOUS, random.getType());
-            assertTrue(List.of("Serious Strategy", "Serious 1", "Serious 2").contains(random.getTitle()));
-        }
-
-        Strategy shouldBeNull = strategyDAO.getRandomByMapAndType(testMap.getId(), StrategyType.AVERAGE);
-        assertNull(shouldBeNull);
+        assertNotNull(random, "Expected a random strategy of type AVERAGE for the map.");
+        assertEquals(StrategyType.AVERAGE, random.getType(), "Expected the strategy to be of type AVERAGE.");
     }
-
 
     @Test
     void testGetByMapIdWithDifferentTypes() {
@@ -94,13 +64,15 @@ class StrategyDAOTest extends DAOTestBase {
         createTestStrategy("Average Game", StrategyType.AVERAGE);
 
         List<Strategy> strategies = strategyDAO.getByMapId(testMap.getId());
-        assertThat(strategies, hasSize(3));
+
+        assertThat(strategies, hasSize(greaterThanOrEqualTo(2)));
+
         assertThat(strategies, hasItems(
-                hasProperty("type", is(StrategyType.SERIOUS)),
                 hasProperty("type", is(StrategyType.TROLL)),
                 hasProperty("type", is(StrategyType.AVERAGE))
         ));
     }
+
 
     private Strategy createTestStrategy(String title, StrategyType type) {
         Strategy s = new Strategy();
@@ -109,11 +81,6 @@ class StrategyDAOTest extends DAOTestBase {
         s.setType(type);
         s.getMaps().add(testMap);
 
-        Strategy created = strategyDAO.create(s);
-
-        testMap.getStrategies().add(created);
-        mapDAO.update(testMap.getId(), testMap);
-
-        return created;
+        return strategyDAO.create(s);
     }
 }

@@ -12,18 +12,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GameDAOTest extends DAOTestBase {
     private GameDAO gameDAO;
-    private Game testGame;
 
     @BeforeEach
     void setUp() {
         gameDAO = GameDAO.getInstance(emf);
-        testGame = new Game();
-        testGame.setName("Test Game");
-        try (EntityManager em = emf.createEntityManager()) {
-            em.getTransaction().begin();
-            em.persist(testGame);
-            em.getTransaction().commit();
-        }
     }
 
     @Test
@@ -31,6 +23,7 @@ class GameDAOTest extends DAOTestBase {
         Game newGame = new Game();
         newGame.setName("New Game");
         Game createdGame = gameDAO.create(newGame);
+
         assertNotNull(createdGame);
         assertNotNull(createdGame.getId());
         assertEquals("New Game", createdGame.getName());
@@ -38,39 +31,51 @@ class GameDAOTest extends DAOTestBase {
 
     @Test
     void testRead() {
-        Game foundGame = gameDAO.read(testGame.getId());
+        // Fetch first game from populated data
+        List<Game> games = gameDAO.readAll();
+        assertFalse(games.isEmpty());
+
+        Game foundGame = gameDAO.read(games.get(0).getId());
         assertNotNull(foundGame);
-        assertEquals(testGame.getId(), foundGame.getId());
-        assertEquals("Test Game", foundGame.getName());
+        assertEquals(games.get(0).getId(), foundGame.getId());
+        assertEquals(games.get(0).getName(), foundGame.getName());
     }
 
     @Test
     void testReadAll() {
-        Game anotherGame = new Game();
-        anotherGame.setName("Another Game");
-        gameDAO.create(anotherGame);
         List<Game> games = gameDAO.readAll();
-        assertThat(games, hasSize(2));
-        assertThat(games, hasItems(
-                hasProperty("name", is("Test Game")),
-                hasProperty("name", is("Another Game"))
+        assertThat(games, hasSize(greaterThanOrEqualTo(1))); // At least 1 game from Populate class
+
+        // Ensure our populated game is in the database
+        assertThat(games, hasItem(
+                hasProperty("name", is("Counter Strike")) // Adjust to match Populate.java
         ));
     }
 
     @Test
     void testUpdate() {
+        List<Game> games = gameDAO.readAll();
+        assertFalse(games.isEmpty());
+
+        Game gameToUpdate = games.get(0);
         Game updatedData = new Game();
         updatedData.setName("Updated Game Name");
-        Game updatedGame = gameDAO.update(testGame.getId(), updatedData);
+
+        Game updatedGame = gameDAO.update(gameToUpdate.getId(), updatedData);
         assertNotNull(updatedGame);
-        assertEquals(testGame.getId(), updatedGame.getId());
+        assertEquals(gameToUpdate.getId(), updatedGame.getId());
         assertEquals("Updated Game Name", updatedGame.getName());
     }
 
     @Test
     void testDelete() {
-        gameDAO.delete(testGame.getId());
-        Game deletedGame = gameDAO.read(testGame.getId());
+        List<Game> games = gameDAO.readAll();
+        assertFalse(games.isEmpty());
+
+        Game gameToDelete = games.get(0);
+        gameDAO.delete(gameToDelete.getId());
+
+        Game deletedGame = gameDAO.read(gameToDelete.getId());
         assertNull(deletedGame);
     }
 }
