@@ -6,16 +6,12 @@ import dat.controllers.IController;
 import dat.dao.impl.GameDAO;
 import dat.dtos.GameDTO;
 import dat.entities.Game;
-import dat.entities.Gun;
-import dat.entities.Map;
 import dat.services.mappers.GameMapper;
 import io.javalin.http.Context;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class GameController implements IController<GameDTO, Long> {

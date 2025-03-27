@@ -4,7 +4,6 @@ import dat.dao.IDAO;
 import dat.entities.Game;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.TypedQuery;
 import lombok.NoArgsConstructor;
 
 import java.util.List;

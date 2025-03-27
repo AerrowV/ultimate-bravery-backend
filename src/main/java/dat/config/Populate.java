@@ -48,10 +48,6 @@ public class Populate {
             if (tx.isActive()) {
                 tx.rollback();
             }
-            e.printStackTrace();
-        } finally {
-            em.close();
-            emf.close();
         }
     }
 }

@@ -2,7 +2,7 @@
 GET {{url}}/auth/test/
 
 > {%
-    client.test("Test endpoint accessible", function() {
+    client.test("Test endpoint accessible", function () {
         client.assert(response.status === 200, "Test endpoint failed");
     });
 %}
@@ -11,7 +11,7 @@ GET {{url}}/auth/test/
 GET {{url}}/games/populate/
 
 > {%
-    client.test("Database populated", function() {
+    client.test("Database populated", function () {
         client.assert(response.status === 200, "Population failed");
     });
 %}
@@ -26,7 +26,7 @@ Content-Type: application/json
 }
 
 > {%
-    client.test("User registration", function() {
+    client.test("User registration", function () {
         client.assert(response.status === 200 || response.status === 201, "Registration failed");
     });
 %}
@@ -41,7 +41,7 @@ Content-Type: application/json
 }
 
 > {%
-    client.test("Login successful", function() {
+    client.test("Login successful", function () {
         client.assert(response.status === 200, "Login failed");
         client.assert(response.body.token, "No token received");
         client.global.set("jwt_token", response.body.token);
@@ -59,7 +59,7 @@ Content-Type: application/json
 }
 
 > {%
-    client.test("Role added successfully", function() {
+    client.test("Role added successfully", function () {
         client.assert(response.status === 200, "Role addition failed");
     });
 %}
@@ -70,7 +70,7 @@ GET {{url}}/games/
 Authorization: Bearer {{jwt_token}}
 
 > {%
-    client.test("Get all games", function() {
+    client.test("Get all games", function () {
         client.assert(response.status === 200, "Failed to get games");
         client.assert(response.body.length > 0, "No games returned");
     });
@@ -81,7 +81,7 @@ GET {{url}}/games/1
 Authorization: Bearer {{jwt_token}}
 
 > {%
-    client.test("Get specific game", function() {
+    client.test("Get specific game", function () {
         client.assert(response.status === 200, "Failed to get game");
         client.assert(response.body.id === 1, "Wrong game returned");
     });
@@ -97,7 +97,7 @@ Content-Type: application/json
 }
 
 > {%
-    client.test("Game created", function() {
+    client.test("Game created", function () {
         client.assert(response.status === 201, "Game creation failed");
         client.global.set("new_game_id", response.body.id);
     });
@@ -113,7 +113,7 @@ Content-Type: application/json
 }
 
 > {%
-    client.test("Game updated", function() {
+    client.test("Game updated", function () {
         client.assert(response.status === 200, "Game update failed");
     });
 %}
@@ -123,7 +123,7 @@ DELETE {{url}}/games/1
 Authorization: Bearer {{jwt_token}}
 
 > {%
-    client.test("Game deleted", function() {
+    client.test("Game deleted", function () {
         client.assert(response.status === 200 || response.status === 204, "Game deletion failed");
     });
 %}

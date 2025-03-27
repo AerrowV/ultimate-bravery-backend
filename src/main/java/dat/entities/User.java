@@ -1,5 +1,6 @@
 package dat.entities;
 
+import dat.entities.security.ISecurityUser;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

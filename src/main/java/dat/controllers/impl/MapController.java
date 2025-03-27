@@ -5,16 +5,15 @@ import dat.controllers.IController;
 import dat.dao.impl.GameDAO;
 import dat.dao.impl.MapDAO;
 import dat.dao.impl.StrategyDAO;
-import dat.services.mappers.MapMapper;
 import dat.dtos.MapDTO;
 import dat.entities.Game;
 import dat.entities.Map;
 import dat.entities.Strategy;
+import dat.services.mappers.MapMapper;
 import io.javalin.http.Context;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 

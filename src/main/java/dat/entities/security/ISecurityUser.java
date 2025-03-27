@@ -1,4 +1,6 @@
-package dat.entities;
+package dat.entities.security;
+
+import dat.entities.Role;
 
 public interface ISecurityUser {
     boolean verifyPassword(String pw);

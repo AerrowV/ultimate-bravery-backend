@@ -1,9 +1,7 @@
 package dat.dao.impl;
 
 import dat.dao.IDAO;
-import dat.dtos.GunDTO;
 import dat.entities.Gun;
-import dat.services.mappers.GunMapper;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
