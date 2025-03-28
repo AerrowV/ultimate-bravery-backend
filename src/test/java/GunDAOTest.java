@@ -51,10 +51,10 @@ class GunDAOTest extends DAOTestBase {
     @Test
     void testReadAll() {
         List<Gun> guns = gunDAO.readAll();
-        assertThat(guns, hasSize(greaterThanOrEqualTo(1))); // At least one gun from Populate.java
+        assertThat(guns, hasSize(greaterThanOrEqualTo(1)));
 
         assertThat(guns, hasItem(
-                hasProperty("name", is("AK-47")) // Match the gun from Populate.java
+                hasProperty("name", is("AK-47"))
         ));
     }
 

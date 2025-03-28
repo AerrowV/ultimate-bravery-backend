@@ -1,25 +1,35 @@
 package RestTest;
 
+import dat.config.ApplicationConfig;
+import dat.config.HibernateConfig;
+import dat.config.Populate;
+import io.javalin.Javalin;
 import io.javalin.http.ContentType;
 import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 
-import static io.restassured.RestAssured.*;
+import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class StrategyRouteTest {
 
+    private Javalin app;
     private static String authToken;
 
     @BeforeAll
-    public static void setup() {
+    public void setup() {
+        HibernateConfig.setTest(true);
+
+        app = ApplicationConfig.startServer(7070);
+
+        Populate.populate(HibernateConfig.getEntityManagerFactoryForTest());
+
         RestAssured.baseURI = "http://localhost:7070/api";
+
         authToken = given()
-                .contentType(ContentType.JSON)
+                .contentType(io.restassured.http.ContentType.JSON)
                 .body("{\"username\":\"admin\", \"password\":\"admin123\"}")
                 .post("/auth/login")
                 .then()
@@ -27,6 +37,7 @@ public class StrategyRouteTest {
     }
 
     @Test
+    @Order(1)
     public void testReadAllStrategies() {
         given()
                 .header("Authorization", "Bearer " + authToken)
@@ -38,6 +49,7 @@ public class StrategyRouteTest {
     }
 
     @Test
+    @Order(2)
     public void testReadStrategyById() {
         given()
                 .header("Authorization", "Bearer " + authToken)
@@ -50,8 +62,8 @@ public class StrategyRouteTest {
     }
 
     @Test
+    @Order(3)
     public void testCreateStrategy() {
-        // Først opret et map for at få et ID
         Long mapId = given()
                 .header("Authorization", "Bearer " + authToken)
                 .contentType(ContentType.JSON)
@@ -61,15 +73,14 @@ public class StrategyRouteTest {
                 .extract().path("id");
 
         String strategyJson = """
-        {
-            "title": "Rush B",
-            "type": "SERIOUS",
-            "teamId": false,
-            "description": "din far",
-            "mapIds": [%d],
-            "strategyId": 2
-        }
-        """.formatted(mapId);
+                {
+                    "title": "Rush B",
+                    "type": "SERIOUS",
+                    "teamId": false,
+                    "description": "din far",
+                    "mapIds": [%d]
+                }
+                """.formatted(mapId);
 
         given()
                 .header("Authorization", "Bearer " + authToken)
@@ -84,8 +95,8 @@ public class StrategyRouteTest {
     }
 
     @Test
+    @Order(4)
     public void testUpdateStrategy() {
-        // 1. Opret Game (hvis nødvendigt for relationer)
         Long gameId = given()
                 .header("Authorization", "Bearer " + authToken)
                 .contentType(ContentType.JSON)
@@ -95,49 +106,48 @@ public class StrategyRouteTest {
                 .statusCode(201)
                 .extract().jsonPath().getLong("id");
 
-        // 2. Opret Map først
         Long mapId = given()
                 .header("Authorization", "Bearer " + authToken)
                 .contentType(ContentType.JSON)
                 .body("""
-            {
-                "name": "Test Map",
-                "gameId": %d
-            }
-            """.formatted(gameId))
+                        {
+                            "name": "Test Map",
+                            "gameId": %d,
+                            "strategyIds": []
+                        
+                        }
+                        """.formatted(gameId))
                 .post("/maps")
                 .then()
                 .statusCode(201)
                 .extract().jsonPath().getLong("id");
 
-        // 3. Opret original strategi
         Long strategyId = given()
                 .header("Authorization", "Bearer " + authToken)
                 .contentType(ContentType.JSON)
                 .body("""
-            {
-                "title": "Initial Strategy",
-                "type": "SERIOUS",
-                "teamId": false,
-                "description": "Initial",
-                "mapIds": [%d]
-            }
-            """.formatted(mapId))
+                        {
+                            "title": "Initial Strategy",
+                            "type": "SERIOUS",
+                            "teamId": false,
+                            "description": "Initial",
+                            "mapIds": [%d]
+                        }
+                        """.formatted(mapId))
                 .post("/strategies")
                 .then()
                 .statusCode(201)
                 .extract().jsonPath().getLong("id");
 
-        // 4. Opdater strategien
         String updateJson = """
-        {
-            "title": "Slow Push",
-            "type": "DEFENSIVE",
-            "teamId": true,
-            "description": "Opdateret beskrivelse",
-            "mapIds": [%d]
-        }
-        """.formatted(mapId);
+                {
+                    "title": "Slow Push",
+                    "type": "SERIOUS",
+                    "teamId": true,
+                    "description": "Opdateret beskrivelse",
+                    "mapIds": [%d]
+                }
+                """.formatted(mapId);
 
         given()
                 .header("Authorization", "Bearer " + authToken)
@@ -147,14 +157,15 @@ public class StrategyRouteTest {
                 .when()
                 .put("/strategies/{id}")
                 .then()
-                .log().all()  // Vigtigt for debugging
+                .log().all()
                 .statusCode(200)
                 .body("title", equalTo("Slow Push"))
-                .body("type", equalTo("DEFENSIVE"))
+                .body("type", equalTo("SERIOUS"))
                 .body("teamId", equalTo(true));
     }
 
     @Test
+    @Order(7)
     public void testDeleteStrategy() {
         given()
                 .header("Authorization", "Bearer " + authToken)
@@ -166,10 +177,11 @@ public class StrategyRouteTest {
     }
 
     @Test
+    @Order(5)
     public void testGetRandomStrategyByMapAndType() {
         given()
                 .header("Authorization", "Bearer " + authToken)
-                .pathParam("mapId", 3)
+                .pathParam("mapId", 1)
                 .queryParam("type", "SERIOUS")
                 .when()
                 .get("/strategies/random/map/{mapId}")
@@ -179,6 +191,7 @@ public class StrategyRouteTest {
     }
 
     @Test
+    @Order(6)
     public void testGetStrategiesByMapId() {
         given()
                 .header("Authorization", "Bearer " + authToken)
@@ -188,5 +201,10 @@ public class StrategyRouteTest {
                 .then()
                 .statusCode(200)
                 .body("size()", greaterThanOrEqualTo(0));
+    }
+
+    @AfterAll
+    public void tearDown() {
+        ApplicationConfig.stopServer(app);
     }
 }

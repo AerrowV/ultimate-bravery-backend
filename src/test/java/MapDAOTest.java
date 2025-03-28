@@ -51,10 +51,10 @@ class MapDAOTest extends DAOTestBase {
     @Test
     void testReadAll() {
         List<Map> maps = mapDAO.readAll();
-        assertThat(maps, hasSize(greaterThanOrEqualTo(1))); // At least one map from Populate.java
+        assertThat(maps, hasSize(greaterThanOrEqualTo(1)));
 
         assertThat(maps, hasItem(
-                hasProperty("name", is("Ancient")) // Match the map from Populate.java
+                hasProperty("name", is("Ancient"))
         ));
     }
 
@@ -70,7 +70,7 @@ class MapDAOTest extends DAOTestBase {
         List<Game> games = gameDAO.readAll();
         assertFalse(games.isEmpty());
 
-        updatedData.setGame(games.get(0)); // Assign to an existing game
+        updatedData.setGame(games.get(0));
 
         Map updatedMap = mapDAO.update(mapToUpdate.getId(), updatedData);
         assertNotNull(updatedMap);

@@ -1,24 +1,35 @@
 package RestTest;
 
+import dat.config.ApplicationConfig;
+import dat.config.HibernateConfig;
+import dat.config.Populate;
+import io.javalin.Javalin;
 import io.javalin.http.ContentType;
 import io.restassured.RestAssured;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class GunRouteTest {
 
+    private Javalin app;
     private static String authToken;
 
     @BeforeAll
-    public static void setup() {
+    public void setup() {
+        HibernateConfig.setTest(true);
+
+        app = ApplicationConfig.startServer(7070);
+
+        Populate.populate(HibernateConfig.getEntityManagerFactoryForTest());
+
         RestAssured.baseURI = "http://localhost:7070/api";
+
         authToken = given()
-                .contentType(ContentType.JSON)
+                .contentType(io.restassured.http.ContentType.JSON)
                 .body("{\"username\":\"admin\", \"password\":\"admin123\"}")
                 .post("/auth/login")
                 .then()
@@ -26,6 +37,7 @@ public class GunRouteTest {
     }
 
     @Test
+    @Order(1)
     public void testReadAllGuns() {
         given()
                 .header("Authorization", "Bearer " + authToken)
@@ -37,18 +49,20 @@ public class GunRouteTest {
     }
 
     @Test
+    @Order(2)
     public void testReadGunById() {
         given()
                 .header("Authorization", "Bearer " + authToken)
-                .pathParam("id", 2)
+                .pathParam("id", 1)
                 .when()
                 .get("/guns/{id}")
                 .then()
                 .statusCode(200)
-                .body("id", equalTo(2));
+                .body("id", equalTo(1));
     }
 
     @Test
+    @Order(3)
     public void testCreateGun() {
         String gunJson = """
             {
@@ -71,6 +85,7 @@ public class GunRouteTest {
     }
 
     @Test
+    @Order(4)
     public void testUpdateGun() {
         String updateJson = """
             {
@@ -94,6 +109,7 @@ public class GunRouteTest {
     }
 
     @Test
+    @Order(6)
     public void testDeleteGun() {
         given()
                 .header("Authorization", "Bearer " + authToken)
@@ -105,14 +121,20 @@ public class GunRouteTest {
     }
 
     @Test
+    @Order(5)
     public void testGetRandomGunByGame() {
         given()
                 .header("Authorization", "Bearer " + authToken)
-                .pathParam("gameId", 2)
+                .pathParam("gameId", 1)
                 .when()
                 .get("/guns/random/game/{gameId}")
                 .then()
                 .statusCode(200)
                 .body("id", notNullValue());
+    }
+
+    @AfterAll
+    public void tearDown() {
+        ApplicationConfig.stopServer(app);
     }
 }

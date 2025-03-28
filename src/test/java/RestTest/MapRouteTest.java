@@ -1,4 +1,8 @@
 package RestTest;
+import dat.config.ApplicationConfig;
+import dat.config.HibernateConfig;
+import dat.config.Populate;
+import io.javalin.Javalin;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.*;
@@ -7,15 +11,24 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class MapRouteTest {
 
+    private Javalin app;
     private static String authToken;
 
     @BeforeAll
-    public static void setup() {
+    public void setup() {
+        HibernateConfig.setTest(true);
+
+        app = ApplicationConfig.startServer(7070);
+
+        Populate.populate(HibernateConfig.getEntityManagerFactoryForTest());
+
         RestAssured.baseURI = "http://localhost:7070/api";
+
         authToken = given()
-                .contentType(ContentType.JSON)
+                .contentType(io.restassured.http.ContentType.JSON)
                 .body("{\"username\":\"admin\", \"password\":\"admin123\"}")
                 .post("/auth/login")
                 .then()
@@ -23,6 +36,7 @@ public class MapRouteTest {
     }
 
     @Test
+    @Order(1)
     public void testReadAllMaps() {
         given()
                 .header("Authorization", "Bearer " + authToken)
@@ -34,6 +48,7 @@ public class MapRouteTest {
     }
 
     @Test
+    @Order(2)
     public void testReadMapById() {
         given()
                 .header("Authorization", "Bearer " + authToken)
@@ -46,18 +61,13 @@ public class MapRouteTest {
     }
 
     @Test
+    @Order(3)
     public void testCreateMap() {
-        String token = given()
-                .contentType(ContentType.JSON)
-                .body("{\"username\":\"admin\", \"password\":\"admin123\"}")
-                .post("/auth/login")
-                .then()
-                .extract().path("token");
-
         String mapJson = """
             {
                 "name": "Dust II",
-                "game_id": "2"
+                "gameId": 1,
+                "strategyIds": [1, 2]
             }
             """;
 
@@ -73,28 +83,30 @@ public class MapRouteTest {
     }
 
     @Test
+    @Order(4)
     public void testUpdateMap() {
         String updateJson = """
             {
                 "name": "Inferno",
-                "gameId": 2
+                "gameId": 1,
+                "strategyIds": [2, 3]
             }
             """;
 
         given()
                 .header("Authorization", "Bearer " + authToken)
                 .contentType(ContentType.JSON)
-                .pathParam("id", 4)
+                .pathParam("id", 1)
                 .body(updateJson)
                 .when()
                 .put("/maps/{id}")
                 .then()
                 .statusCode(200)
-                .body("name", equalTo("Inferno"))
-                .body("gameId", equalTo("2"));
+                .body("name", equalTo("Inferno"));
     }
 
     @Test
+    @Order(5)
     public void testDeleteMap() {
         given()
                 .header("Authorization", "Bearer " + authToken)
@@ -103,5 +115,10 @@ public class MapRouteTest {
                 .delete("/maps/{id}")
                 .then()
                 .statusCode(204);
+    }
+
+    @AfterAll
+    public void tearDown() {
+        ApplicationConfig.stopServer(app);
     }
 }

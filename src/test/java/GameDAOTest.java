@@ -31,7 +31,6 @@ class GameDAOTest extends DAOTestBase {
 
     @Test
     void testRead() {
-        // Fetch first game from populated data
         List<Game> games = gameDAO.readAll();
         assertFalse(games.isEmpty());
 
@@ -44,11 +43,10 @@ class GameDAOTest extends DAOTestBase {
     @Test
     void testReadAll() {
         List<Game> games = gameDAO.readAll();
-        assertThat(games, hasSize(greaterThanOrEqualTo(1))); // At least 1 game from Populate class
+        assertThat(games, hasSize(greaterThanOrEqualTo(1)));
 
-        // Ensure our populated game is in the database
         assertThat(games, hasItem(
-                hasProperty("name", is("Counter Strike")) // Adjust to match Populate.java
+                hasProperty("name", is("Counter Strike"))
         ));
     }
 

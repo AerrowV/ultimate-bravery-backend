@@ -14,8 +14,8 @@ public class StrategyMapper {
                 strategy.getTitle(),
                 strategy.getDescription(),
                 strategy.isTeamId(),
-                strategy.getType() != null ? strategy.getType().toString() : null, // Convert enum to String
-                strategy.getMaps().stream().map(m -> m.getId()).collect(Collectors.toList()) // Extract map IDs
+                strategy.getType() != null ? strategy.getType().toString() : null,
+                strategy.getMaps().stream().map(m -> m.getId()).collect(Collectors.toList())
         );
     }
 
@@ -25,11 +25,9 @@ public class StrategyMapper {
         strategy.setTitle(strategyDTO.getTitle());
         strategy.setDescription(strategyDTO.getDescription());
         strategy.setTeamId(strategyDTO.isTeamId());
-        // The `type` field needs to be mapped from the String back to the StrategyType enum
         if (strategyDTO.getType() != null) {
-            strategy.setType(StrategyType.valueOf(strategyDTO.getType())); // Convert String back to enum
+            strategy.setType(StrategyType.valueOf(strategyDTO.getType()));
         }
-        // The `maps` field should be set later in the service layer
         return strategy;
     }
 }

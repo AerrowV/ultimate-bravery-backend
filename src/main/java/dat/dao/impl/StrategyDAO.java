@@ -74,17 +74,23 @@ public class StrategyDAO implements IDAO<Strategy, Long> {
     public void delete(Long id) {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
+
             Strategy strategy = em.find(Strategy.class, id);
             if (strategy != null) {
+                strategy.getMaps().forEach(map -> map.getStrategies().remove(strategy));
+                strategy.getMaps().clear();
+                em.merge(strategy);
+
                 em.remove(strategy);
             }
+
             em.getTransaction().commit();
         }
     }
 
+
     public List<Strategy> getByMapId(Long mapId) {
         try (EntityManager em = emf.createEntityManager()) {
-            // Use JOIN FETCH to eagerly load the maps collection just for this query
             TypedQuery<Strategy> query = em.createQuery(
                     "SELECT s FROM Strategy s LEFT JOIN FETCH s.maps m WHERE m.id = :mapId", Strategy.class
             );
@@ -96,7 +102,6 @@ public class StrategyDAO implements IDAO<Strategy, Long> {
 
     public Strategy getRandomByMapAndType(Long mapId, StrategyType type) {
         try (EntityManager em = emf.createEntityManager()) {
-            // Use JOIN FETCH to eagerly load the maps collection just for this query
             TypedQuery<Strategy> query = em.createQuery(
                     "SELECT s FROM Strategy s LEFT JOIN FETCH s.maps m WHERE m.id = :mapId AND s.type = :type",
                     Strategy.class

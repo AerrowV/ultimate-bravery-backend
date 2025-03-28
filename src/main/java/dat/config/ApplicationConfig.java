@@ -38,7 +38,6 @@ public class ApplicationConfig {
         app.beforeMatched(accessController::accessHandler);
         app.after(ApplicationConfig::afterRequest);
 
-        // Register exception handlers with correct parameter order
         app.exception(Exception.class, (e, ctx) -> ApplicationConfig.generalExceptionHandler(e, ctx));
         app.exception(ApiException.class, (e, ctx) -> ApplicationConfig.apiExceptionHandler(e, ctx));
 

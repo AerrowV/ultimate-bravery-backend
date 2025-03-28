@@ -19,7 +19,7 @@ public class SecurityRoutes {
                 get("/test", ctx -> ctx.json(jsonMapper.createObjectNode().put("msg", "Hello from Open Deployment")), Role.ADMIN);
                 post("/login", securityController.login(), Role.ANYONE);
                 post("/register", securityController.register(), Role.ANYONE);
-                post("/user/addrole", securityController.addRole(), Role.ADMIN);
+                post("/auth/user/addrole", securityController.addRole(), Role.USER);
             });
         };
     }

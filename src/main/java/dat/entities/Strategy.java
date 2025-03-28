@@ -25,7 +25,7 @@ public class Strategy {
     @Enumerated(EnumType.STRING)
     private StrategyType type;
 
-    @ManyToMany(mappedBy = "strategies")
+    @ManyToMany(mappedBy = "strategies", fetch = FetchType.EAGER)
     private Set<Map> maps = new HashSet<>();
 
     public Strategy() {

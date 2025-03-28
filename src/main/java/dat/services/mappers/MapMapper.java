@@ -11,8 +11,8 @@ public class MapMapper {
         return new MapDTO(
                 map.getId(),
                 map.getName(),
-                map.getGame() != null ? map.getGame().getId() : null, // Handle potential null reference
-                map.getStrategies().stream().map(s -> s.getId()).collect(Collectors.toList()) // Extract strategy IDs
+                map.getGame() != null ? map.getGame().getId() : null,
+                map.getStrategies().stream().map(s -> s.getId()).collect(Collectors.toList())
         );
     }
 
@@ -20,7 +20,6 @@ public class MapMapper {
         Map map = new Map();
         map.setId(mapDTO.getId());
         map.setName(mapDTO.getName());
-        // The `game` and `strategies` fields should be set later in the service layer
         return map;
     }
 }
