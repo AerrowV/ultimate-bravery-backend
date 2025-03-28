@@ -31,9 +31,8 @@ public class SecurityRoutesTest {
     public void testRegister() {
         String registerJson = """
             {
-                "username": "testuser",
-                "password": "test123",
-                "email": "test@example.com"
+                "username": "testuser2",
+                "password": "test1234"
             }
             """;
 
@@ -67,7 +66,7 @@ public class SecurityRoutesTest {
         String addRoleJson = """
             {
                 "username": "testuser",
-                "role": "MODERATOR"
+                "role": "ADMIN" 
             }
             """;
 

@@ -1,10 +1,11 @@
 package dat.config;
 
-
 import dat.entities.Game;
 import dat.entities.Gun;
 import dat.entities.Map;
+import dat.entities.Role;
 import dat.entities.Strategy;
+import dat.entities.User;
 import dat.entities.enums.StrategyType;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -18,6 +19,23 @@ public class Populate {
         try {
             tx.begin();
 
+            // Create roles first
+            Role userRole = new Role("USER");
+            Role adminRole = new Role("ADMIN");
+            em.persist(userRole);
+            em.persist(adminRole);
+
+            // Create admin user
+            User admin = new User("admin", "admin123");
+            admin.addRole(adminRole);
+            em.persist(admin);
+
+            // Create regular user (optional)
+            User testUser = new User("testuser", "test123");
+            testUser.addRole(userRole);
+            em.persist(testUser);
+
+            // Your existing game data
             Game game1 = new Game("Counter Strike");
             em.persist(game1);
 
@@ -46,12 +64,15 @@ public class Populate {
 
             tx.commit();
 
-            System.out.println("Database populated with sample data.");
+            System.out.println("Database populated with sample data including admin user.");
 
         } catch (RuntimeException e) {
             if (tx.isActive()) {
                 tx.rollback();
             }
+            throw e; // Re-throw the exception after rollback
+        } finally {
+            em.close();
         }
     }
 }

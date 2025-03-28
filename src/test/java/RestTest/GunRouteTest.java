@@ -83,7 +83,7 @@ public class GunRouteTest {
         given()
                 .header("Authorization", "Bearer " + authToken)
                 .contentType(ContentType.JSON)
-                .pathParam("id", 3)
+                .pathParam("id", 2)
                 .body(updateJson)
                 .when()
                 .put("/guns/{id}")

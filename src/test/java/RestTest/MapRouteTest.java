@@ -37,20 +37,27 @@ public class MapRouteTest {
     public void testReadMapById() {
         given()
                 .header("Authorization", "Bearer " + authToken)
-                .pathParam("id", 3)
+                .pathParam("id", 1)
                 .when()
                 .get("/maps/{id}")
                 .then()
                 .statusCode(200)
-                .body("id", equalTo(3));
+                .body("id", equalTo(1));
     }
 
     @Test
     public void testCreateMap() {
+        String token = given()
+                .contentType(ContentType.JSON)
+                .body("{\"username\":\"admin\", \"password\":\"admin123\"}")
+                .post("/auth/login")
+                .then()
+                .extract().path("token");
+
         String mapJson = """
             {
                 "name": "Dust II",
-                "size": "Medium"
+                "game_id": "2"
             }
             """;
 
