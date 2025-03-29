@@ -12,6 +12,7 @@ public class MapDTO {
 
     private List<Long> strategyIds;
 
+
     public MapDTO() {
     }
 
@@ -21,4 +22,5 @@ public class MapDTO {
         this.gameId = gameId;
         this.strategyIds = strategyIds;
     }
+
 }

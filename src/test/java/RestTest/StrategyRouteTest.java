@@ -53,12 +53,12 @@ public class StrategyRouteTest {
     public void testReadStrategyById() {
         given()
                 .header("Authorization", "Bearer " + authToken)
-                .pathParam("id", 2)
+                .pathParam("id", 1)
                 .when()
                 .get("/strategies/{id}")
                 .then()
                 .statusCode(200)
-                .body("id", equalTo(2));
+                .body("id", equalTo(1));
     }
 
     @Test

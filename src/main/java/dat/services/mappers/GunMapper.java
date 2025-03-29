@@ -19,7 +19,6 @@ public class GunMapper {
         gun.setId(gunDTO.getId());
         gun.setName(gunDTO.getName());
         gun.setTeamId(gunDTO.isTeamId());
-        // The `game` field should be set later in the service layer (fetch Game entity by ID)
         return gun;
     }
 }

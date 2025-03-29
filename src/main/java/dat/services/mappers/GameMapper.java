@@ -16,7 +16,6 @@ public class GameMapper {
         Game game = new Game();
         game.setId(gameDTO.getId());
         game.setName(gameDTO.getName());
-        // Maps and Guns should be set later by the service layer, as only IDs are available here.
         return game;
     }
 }
