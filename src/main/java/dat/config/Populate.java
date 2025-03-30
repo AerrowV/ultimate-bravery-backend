@@ -14,53 +14,48 @@ public class Populate {
         try {
             tx.begin();
 
-            long roleCount = em.createQuery("SELECT COUNT(r) FROM Role r", Long.class).getSingleResult();
-            if (roleCount == 0) {
-                Role userRole = new Role("USER");
-                Role adminRole = new Role("ADMIN");
-                em.persist(userRole);
-                em.persist(adminRole);
+            Role userRole = new Role("USER");
+            Role adminRole = new Role("ADMIN");
+            em.persist(userRole);
+            em.persist(adminRole);
 
-                User admin = new User("admin", "admin123");
-                admin.addRole(adminRole);
-                em.persist(admin);
+            User admin = new User("admin", "admin123");
+            admin.addRole(adminRole);
+            em.persist(admin);
 
-                User testUser = new User("testuser", "test123");
-                testUser.addRole(userRole);
-                em.persist(testUser);
-            }
+            User testUser = new User("testuser", "test123");
+            testUser.addRole(userRole);
+            em.persist(testUser);
 
-            long gameCount = em.createQuery("SELECT COUNT(g) FROM Game g", Long.class).getSingleResult();
-            if (gameCount == 0) {
-                Game game1 = new Game("Counter Strike");
-                em.persist(game1);
+            Game game1 = new Game("Counter Strike");
+            em.persist(game1);
 
-                Strategy strategy1 = new Strategy("Mid fake", "2 terrorist push mid with flash, the rest waits in b doors until attention is mid, then rush up b ramp.", false, StrategyType.SERIOUS);
-                Strategy strategy2 = new Strategy("B split(Cave push)", "First 4 terrorist push cave, 1 waits ramp for them to crunch 'B' site at the same time.", false, StrategyType.AVERAGE);
-                Strategy strategy3 = new Strategy("Just for the lols", "Gotta take a gun and do the shooty shoot", false, StrategyType.TROLL);
-                em.persist(strategy1);
-                em.persist(strategy2);
-                em.persist(strategy3);
+            Strategy strategy1 = new Strategy("Mid fake", "2 terrorist push mid with flash, the rest waits in b doors until attention is mid, then rush up b ramp.", false, StrategyType.SERIOUS);
+            Strategy strategy2 = new Strategy("B split(Cave push)", "First 4 terrorist push cave, 1 waits ramp for them to crunch 'B' site at the same time.", false, StrategyType.AVERAGE);
+            Strategy strategy3 = new Strategy("Just for the lols", "Gotta take a gun and do the shooty shoot", false, StrategyType.TROLL);
+            em.persist(strategy1);
+            em.persist(strategy2);
+            em.persist(strategy3);
 
-                Map map1 = new Map("Ancient", game1);
-                Map map2 = new Map("Inferno", game1);
-                em.persist(map1);
-                em.persist(map2);
+            Map map1 = new Map("Ancient", game1);
+            Map map2 = new Map("Inferno", game1);
+            em.persist(map1);
+            em.persist(map2);
 
-                map1.getStrategies().add(strategy1);
-                map1.getStrategies().add(strategy2);
-                map1.getStrategies().add(strategy3);
+            map1.getStrategies().add(strategy1);
+            map1.getStrategies().add(strategy2);
+            map1.getStrategies().add(strategy3);
 
-                strategy1.getMaps().add(map1);
-                strategy2.getMaps().add(map1);
-                strategy3.getMaps().add(map1);
+            strategy1.getMaps().add(map1);
+            strategy2.getMaps().add(map1);
+            strategy3.getMaps().add(map1);
 
-                Gun gun1 = new Gun("AK-47", false, game1);
-                em.persist(gun1);
-            }
+            Gun gun1 = new Gun("AK-47", false, game1);
+            em.persist(gun1);
 
             tx.commit();
-            System.out.println("Database populated with sample data (checked for duplicates).");
+
+            System.out.println("Database populated with sample data including admin user.");
 
         } catch (RuntimeException e) {
             if (tx.isActive()) {
