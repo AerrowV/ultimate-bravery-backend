@@ -52,7 +52,6 @@ public class HibernateConfig {
         try {
             Configuration configuration = new Configuration();
             Properties props = new Properties();
-            // Set the properties
             setBaseProperties(props);
             if (forTest) {
                 props = setTestProperties(props);
