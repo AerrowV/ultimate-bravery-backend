@@ -9,7 +9,7 @@ import org.junit.jupiter.api.TestInstance;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class DAOTestBase {
-    protected static EntityManagerFactory emf;
+    protected EntityManagerFactory emf;
 
     @BeforeAll
     void setUpAll() {
