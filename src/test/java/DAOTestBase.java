@@ -20,7 +20,7 @@ public class DAOTestBase {
     }
 
     @AfterAll
-    static void tearDownAll() {
+    void tearDownAll() {
         if (emf != null && emf.isOpen()) {
             emf.close();
         }
