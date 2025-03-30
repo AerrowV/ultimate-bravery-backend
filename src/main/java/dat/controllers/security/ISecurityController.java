@@ -11,13 +11,13 @@ import java.util.Set;
  * Author: Thomas Hartmann
  */
 public interface ISecurityController {
-    Handler login(); // to get a token
+    Handler login();
 
-    Handler register(); // to get a user
+    Handler register();
 
-    Handler authenticate(); // to verify roles inside token
+    Handler authenticate();
 
-    boolean authorize(UserDTO userDTO, Set<RouteRole> allowedRoles); // to verify user roles
+    boolean authorize(UserDTO userDTO, Set<RouteRole> allowedRoles);
 
     String createToken(UserDTO user) throws Exception;
 

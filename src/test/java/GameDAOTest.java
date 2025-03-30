@@ -1,6 +1,5 @@
 import dat.dao.impl.GameDAO;
 import dat.entities.Game;
-import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

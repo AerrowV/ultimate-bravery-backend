@@ -8,15 +8,15 @@ import io.javalin.http.ContentType;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.*;
 
-import static io.restassured.RestAssured.*;
+import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class GunRouteTest {
 
-    private Javalin app;
     private static String authToken;
+    private Javalin app;
 
     @BeforeAll
     public void setup() {
@@ -65,12 +65,12 @@ public class GunRouteTest {
     @Order(3)
     public void testCreateGun() {
         String gunJson = """
-            {
-                "name": "AK-47",
-                "teamId":  false,
-                "gameId": 2
-            }
-            """;
+                {
+                    "name": "AK-47",
+                    "teamId":  false,
+                    "gameId": 2
+                }
+                """;
 
         given()
                 .header("Authorization", "Bearer " + authToken)
@@ -88,12 +88,12 @@ public class GunRouteTest {
     @Order(4)
     public void testUpdateGun() {
         String updateJson = """
-            {
-                "name": "M4A1-S",
-                "teamId":  false,
-                "gameId": 2
-            }
-            """;
+                {
+                    "name": "M4A1-S",
+                    "teamId":  false,
+                    "gameId": 2
+                }
+                """;
 
         given()
                 .header("Authorization", "Bearer " + authToken)

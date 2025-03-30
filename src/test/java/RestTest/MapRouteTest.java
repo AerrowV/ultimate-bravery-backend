@@ -1,4 +1,5 @@
 package RestTest;
+
 import dat.config.ApplicationConfig;
 import dat.config.HibernateConfig;
 import dat.config.Populate;
@@ -7,15 +8,16 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.*;
 
-import static io.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class MapRouteTest {
 
-    private Javalin app;
     private static String authToken;
+    private Javalin app;
 
     @BeforeAll
     public void setup() {
@@ -64,12 +66,12 @@ public class MapRouteTest {
     @Order(3)
     public void testCreateMap() {
         String mapJson = """
-            {
-                "name": "Dust II",
-                "gameId": 1,
-                "strategyIds": [1, 2]
-            }
-            """;
+                {
+                    "name": "Dust II",
+                    "gameId": 1,
+                    "strategyIds": [1, 2]
+                }
+                """;
 
         given()
                 .header("Authorization", "Bearer " + authToken)
@@ -86,12 +88,12 @@ public class MapRouteTest {
     @Order(4)
     public void testUpdateMap() {
         String updateJson = """
-            {
-                "name": "Inferno",
-                "gameId": 1,
-                "strategyIds": [2, 3]
-            }
-            """;
+                {
+                    "name": "Inferno",
+                    "gameId": 1,
+                    "strategyIds": [2, 3]
+                }
+                """;
 
         given()
                 .header("Authorization", "Bearer " + authToken)

@@ -15,8 +15,8 @@ import static org.hamcrest.Matchers.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class StrategyRouteTest {
 
-    private Javalin app;
     private static String authToken;
+    private Javalin app;
 
     @BeforeAll
     public void setup() {

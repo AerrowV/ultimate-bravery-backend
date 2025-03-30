@@ -89,7 +89,7 @@ public class GameController implements IController<GameDTO, Long> {
         return ctx.bodyValidator(GameDTO.class)
                 .check(g -> g.getName() != null && !g.getName().isEmpty(),
                         "Game name is required")
-                .get(); // Only validate what exists in DTO
+                .get();
     }
 
     public void getByMap(Context ctx) {

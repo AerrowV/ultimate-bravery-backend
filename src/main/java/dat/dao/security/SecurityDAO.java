@@ -30,8 +30,8 @@ public class SecurityDAO implements ISecurityDAO {
         try (EntityManager em = getEntityManager()) {
             User user = em.find(User.class, username);
             if (user == null)
-                throw new EntityNotFoundException("No user found with username: " + username); //RuntimeException
-            user.getRoles().size(); // force roles to be fetched from db
+                throw new EntityNotFoundException("No user found with username: " + username);
+            user.getRoles().size();
             if (!user.verifyPassword(password))
                 throw new ValidationException("Wrong password");
             return new UserDTO(user.getUsername(), user.getRoles().stream().map(r -> r.getRoleName()).collect(Collectors.toSet()));

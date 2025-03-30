@@ -19,15 +19,13 @@ public class Utils {
     }
 
     public static String getPropertyValue(String propName, String resourceName) {
-        // REMEMBER TO BUILD WITH MAVEN FIRST. Read the property file if not deployed (else read system vars instead)
-        // Read from ressources/config.properties or from pom.xml depending on the ressourceName
         try (InputStream is = Utils.class.getClassLoader().getResourceAsStream(resourceName)) {
             Properties prop = new Properties();
             prop.load(is);
 
             String value = prop.getProperty(propName);
             if (value != null) {
-                return value.trim();  // Trim whitespace
+                return value.trim();
             } else {
                 throw new ApiRuntimeException(500, String.format("Property %s not found in %s", propName, resourceName));
             }
@@ -39,11 +37,11 @@ public class Utils {
 
     public static String convertToJsonMessage(Context ctx, String property, String message) {
         Map<String, String> msgMap = new HashMap<>();
-        msgMap.put(property, message);  // Put the message in the map
-        msgMap.put("status", String.valueOf(ctx.status()));  // Put the status in the map
+        msgMap.put(property, message);
+        msgMap.put("status", String.valueOf(ctx.status()));
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            return objectMapper.writeValueAsString(msgMap);  // Convert the map to JSON
+            return objectMapper.writeValueAsString(msgMap);
         } catch (Exception e) {
             return "{\"error\": \"Could not convert  message to JSON\"}";
         }
@@ -51,8 +49,8 @@ public class Utils {
 
     public ObjectMapper getObjectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false); // Ignore unknown properties in JSON
-        objectMapper.registerModule(new JavaTimeModule()); // Serialize and deserialize java.time objects
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        objectMapper.registerModule(new JavaTimeModule());
         objectMapper.writer(new DefaultPrettyPrinter());
         return objectMapper;
     }

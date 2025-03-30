@@ -61,7 +61,7 @@ public class SecurityRoutesTest {
                 .when()
                 .get("/auth/test")
                 .then()
-                .statusCode(401);  // Unauthorized
+                .statusCode(401);
     }
 
     @Test

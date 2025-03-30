@@ -9,7 +9,7 @@ public class GunMapper {
         return new GunDTO(
                 gun.getId(),
                 gun.getName(),
-                gun.getGame() != null ? gun.getGame().getId() : null, // Handle potential null reference
+                gun.getGame() != null ? gun.getGame().getId() : null,
                 gun.isTeamId()
         );
     }

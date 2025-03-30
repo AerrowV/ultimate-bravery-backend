@@ -43,7 +43,7 @@ public class SecurityController implements ISecurityController {
     private SecurityController() {
     }
 
-    public static SecurityController getInstance() { // Singleton because we don't want multiple instances of the same class
+    public static SecurityController getInstance() {
         if (instance == null) {
             instance = new SecurityController();
         }
@@ -54,7 +54,7 @@ public class SecurityController implements ISecurityController {
     @Override
     public Handler login() {
         return (ctx) -> {
-            ObjectNode returnObject = objectMapper.createObjectNode(); // for sending json messages back to the client
+            ObjectNode returnObject = objectMapper.createObjectNode();
             try {
                 UserDTO user = ctx.bodyAsClass(UserDTO.class);
                 UserDTO verifiedUser = securityDAO.getVerifiedUser(user.getUsername(), user.getPassword());
@@ -96,7 +96,6 @@ public class SecurityController implements ISecurityController {
 
         ObjectNode returnObject = objectMapper.createObjectNode();
         return (ctx) -> {
-            // This is a preflight request => OK
             if (ctx.method().toString().equals("OPTIONS")) {
                 ctx.status(200);
                 return;
@@ -123,13 +122,12 @@ public class SecurityController implements ISecurityController {
     }
 
     @Override
-    // Check if the user's roles contain any of the allowed roles
     public boolean authorize(UserDTO user, Set<RouteRole> allowedRoles) {
         if (user == null) {
             throw new UnauthorizedResponse("You need to log in, dude!");
         }
         Set<String> roleNames = allowedRoles.stream()
-                .map(RouteRole::toString)  // Convert RouteRoles to  Set of Strings
+                .map(RouteRole::toString)
                 .collect(Collectors.toSet());
         return user.getRoles().stream()
                 .map(String::toUpperCase)
@@ -180,8 +178,6 @@ public class SecurityController implements ISecurityController {
         return (ctx) -> {
             ObjectNode returnObject = objectMapper.createObjectNode();
             try {
-                // get the role from the body. the json is {"role": "manager"}.
-                // We need to get the role from the body and the username from the token
                 String newRole = ctx.bodyAsClass(ObjectNode.class).get("role").asText();
                 UserDTO user = ctx.attribute("user");
                 User updatedUser = securityDAO.addRole(user, newRole);
@@ -192,7 +188,6 @@ public class SecurityController implements ISecurityController {
         };
     }
 
-    // Health check for the API. Used in deployment
     public void healthCheck(@NotNull Context ctx) {
         ctx.status(200).json("{\"msg\": \"API is up and running\"}");
     }

@@ -26,7 +26,7 @@ public class ApplicationConfig {
     public static void configuration(JavalinConfig config) {
         config.showJavalinBanner = false;
         config.bundledPlugins.enableRouteOverview("/routes", Role.ANYONE);
-        config.router.contextPath = "/api"; // base path for all endpoints
+        config.router.contextPath = "/api";
         config.router.apiBuilder(routes.getRoutes());
 //        config.router.apiBuilder(SecurityRoutes.getSecuredRoutes());
 //        config.router.apiBuilder(SecurityRoutes.getSecurityRoutes());
@@ -56,7 +56,7 @@ public class ApplicationConfig {
 
     private static void generalExceptionHandler(Exception e, Context ctx) {
         logger.error("An unhandled exception occurred: {}", e.getMessage());
-        ctx.status(500); // Set appropriate HTTP status
+        ctx.status(500);
         ctx.json(Utils.convertToJsonMessage(ctx, "error", e.getMessage()));
     }
 

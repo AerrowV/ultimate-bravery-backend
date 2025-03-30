@@ -17,8 +17,8 @@ import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class GameRouteTest {
 
-    private Javalin app;
     private static String authToken;
+    private Javalin app;
 
     @BeforeAll
     public void setup() {
