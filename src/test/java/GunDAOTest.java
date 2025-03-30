@@ -2,7 +2,6 @@ import dat.dao.impl.GameDAO;
 import dat.dao.impl.GunDAO;
 import dat.entities.Game;
 import dat.entities.Gun;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -107,12 +106,5 @@ class GunDAOTest extends DAOTestBase {
 
         Gun shouldBeNull = gunDAO.getRandomByGameId(999L);
         assertNull(shouldBeNull);
-    }
-
-    @AfterAll
-    void tearDownAll() {
-        if (emf != null && emf.isOpen()) {
-            emf.close();
-        }
     }
 }

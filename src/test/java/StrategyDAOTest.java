@@ -3,7 +3,6 @@ import dat.dao.impl.StrategyDAO;
 import dat.entities.Map;
 import dat.entities.Strategy;
 import dat.entities.enums.StrategyType;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -83,12 +82,5 @@ class StrategyDAOTest extends DAOTestBase {
         s.getMaps().add(testMap);
 
         return strategyDAO.create(s);
-    }
-
-    @AfterAll
-    void tearDownAll() {
-        if (emf != null && emf.isOpen()) {
-            emf.close();
-        }
     }
 }

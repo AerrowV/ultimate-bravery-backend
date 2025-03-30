@@ -4,7 +4,6 @@ import dat.entities.User;
 import dat.exceptions.ValidationException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -79,13 +78,6 @@ class UserDAOTest extends DAOTestBase {
             assertNotNull(foundUser);
             assertNotEquals("password123", foundUser.getPassword());
             assertTrue(foundUser.verifyPassword("password123"));
-        }
-    }
-
-    @AfterAll
-    void tearDownAll() {
-        if (emf != null && emf.isOpen()) {
-            emf.close();
         }
     }
 }
