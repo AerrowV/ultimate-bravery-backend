@@ -2,7 +2,6 @@ import dat.config.HibernateConfig;
 import dat.config.Populate;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestInstance;
@@ -16,13 +15,6 @@ public class DAOTestBase {
         if (emf == null || !emf.isOpen()) {
             HibernateConfig.setTest(true);
             emf = HibernateConfig.getEntityManagerFactoryForTest();
-        }
-    }
-
-    @AfterAll
-    void tearDownAll() {
-        if (emf != null && emf.isOpen()) {
-            emf.close();
         }
     }
 

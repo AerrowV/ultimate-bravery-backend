@@ -2,6 +2,7 @@ import dat.dao.impl.GameDAO;
 import dat.dao.impl.MapDAO;
 import dat.entities.Game;
 import dat.entities.Map;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -88,5 +89,12 @@ class MapDAOTest extends DAOTestBase {
 
         Map deletedMap = mapDAO.read(mapToDelete.getId());
         assertNull(deletedMap);
+    }
+
+    @AfterAll
+    void tearDownAll() {
+        if (emf != null && emf.isOpen()) {
+            emf.close();
+        }
     }
 }

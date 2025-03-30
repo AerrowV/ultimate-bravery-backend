@@ -1,5 +1,6 @@
 import dat.dao.impl.GameDAO;
 import dat.entities.Game;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -74,5 +75,12 @@ class GameDAOTest extends DAOTestBase {
 
         Game deletedGame = gameDAO.read(gameToDelete.getId());
         assertNull(deletedGame);
+    }
+
+    @AfterAll
+    void tearDownAll() {
+        if (emf != null && emf.isOpen()) {
+            emf.close();
+        }
     }
 }
