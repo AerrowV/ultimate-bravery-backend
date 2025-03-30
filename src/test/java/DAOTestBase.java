@@ -12,7 +12,7 @@ public class DAOTestBase {
     protected static EntityManagerFactory emf;
 
     @BeforeAll
-    static void setUpAll() {
+    void setUpAll() {
         if (emf == null || !emf.isOpen()) {
             HibernateConfig.setTest(true);
             emf = HibernateConfig.getEntityManagerFactoryForTest();
