@@ -1,5 +1,3 @@
-Thanks! Here's a more accurate and polished README tailored for a REST API project:
-
 ---
 
 # 🧠 UltimateBravery - REST API
