@@ -1,5 +1,3 @@
----
-
 # 🧠 UltimateBravery - REST API
 
 **UltimateBravery** is a RESTful API built with Java, Javalin, and JPA that delivers randomized game strategies for competitive shooters like CS2 (Counter-Strike 2). It was developed as part of a semester project focusing on software design, security, and deployment best practices.
