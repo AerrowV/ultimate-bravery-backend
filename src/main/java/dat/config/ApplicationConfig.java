@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
 
 public class ApplicationConfig {
     private static ObjectMapper jsonMapper = new Utils().getObjectMapper();
-    private static SecurityController securityController = SecurityController.getInstance();
     private static AccessController accessController = new AccessController();
     private static Logger logger = LoggerFactory.getLogger(ApplicationConfig.class);
     private static Routes routes = new Routes();
@@ -25,11 +24,9 @@ public class ApplicationConfig {
 
     public static void configuration(JavalinConfig config) {
         config.showJavalinBanner = false;
-        config.bundledPlugins.enableRouteOverview("/routes", Role.ANYONE);
+        config.bundledPlugins.enableRouteOverview("/routes");
         config.router.contextPath = "/api";
         config.router.apiBuilder(routes.getRoutes());
-//        config.router.apiBuilder(SecurityRoutes.getSecuredRoutes());
-//        config.router.apiBuilder(SecurityRoutes.getSecurityRoutes());
     }
 
     public static Javalin startServer(int port) {
@@ -37,6 +34,9 @@ public class ApplicationConfig {
 
         app.beforeMatched(accessController::accessHandler);
         app.after(ApplicationConfig::afterRequest);
+
+        app.before(ApplicationConfig::corsHeaders);
+        app.options("/*", ApplicationConfig::corsHeadersOptions);
 
         app.exception(Exception.class, (e, ctx) -> ApplicationConfig.generalExceptionHandler(e, ctx));
         app.exception(ApiException.class, (e, ctx) -> ApplicationConfig.apiExceptionHandler(e, ctx));
@@ -64,5 +64,20 @@ public class ApplicationConfig {
         ctx.status(e.getStatusCode());
         logger.warn("An API exception occurred: Code: {}, Message: {}", e.getStatusCode(), e.getMessage());
         ctx.json(Utils.convertToJsonMessage(ctx, "warning", e.getMessage()));
+    }
+
+    private static void corsHeaders(Context ctx) {
+        ctx.header("Access-Control-Allow-Origin", "*");
+        ctx.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        ctx.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+        ctx.header("Access-Control-Allow-Credentials", "true");
+    }
+
+    private static void corsHeadersOptions(Context ctx) {
+        ctx.header("Access-Control-Allow-Origin", "*");
+        ctx.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        ctx.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+        ctx.header("Access-Control-Allow-Credentials", "true");
+        ctx.status(204);
     }
 }

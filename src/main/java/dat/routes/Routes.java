@@ -10,7 +10,6 @@ public class Routes {
     private final GunRoute gunRoute = new GunRoute();
     private final MapRoute mapRoute = new MapRoute();
     private final StrategyRoute strategyRoute = new StrategyRoute();
-    private final SecurityRoutes securityRoutes = new SecurityRoutes();
 
     public EndpointGroup getRoutes() {
         return () -> {
