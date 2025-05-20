@@ -7,7 +7,7 @@
 - Get randomized "Ultimate Bravery"-style strategies for selected games and maps
 - Categorize strategies by type: serious, average, or troll
 - JWT-secured endpoints for user login and registration
-- 🗺Manage games, maps, guns, strategies, and more via RESTful routes
+- Manage games, maps, guns, strategies, and more via RESTful routes
 - Integration and unit testing using JUnit, Testcontainers, and RestAssured
 - Dockerized for easy deployment (via GitHub Actions + DigitalOcean)
 - HTTPS enabled with Caddy
