@@ -53,7 +53,7 @@ Use `/auth/register` and `/auth/login` to get a JWT token. Add it to your header
 Authorization: Bearer <your_token_here>
 ```
 
-## 📬 Example Endpoints
+## Example Endpoints
 
 | Method | Endpoint             | Description                      |
 |--------|----------------------|----------------------------------|
