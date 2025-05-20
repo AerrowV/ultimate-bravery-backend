@@ -45,7 +45,7 @@ class GameDAOTest extends DAOTestBase {
         assertThat(games, hasSize(greaterThanOrEqualTo(1)));
 
         assertThat(games, hasItem(
-                hasProperty("name", is("Counter Strike"))
+                hasProperty("name", is("Counter-Strike 2"))
         ));
     }
 
