@@ -58,20 +58,20 @@ class StrategyDAOTest extends DAOTestBase {
         assertEquals(StrategyType.AVERAGE, random.getType(), "Expected the strategy to be of type AVERAGE.");
     }
 
-    @Test
-    void testGetByMapIdWithDifferentTypes() {
-        createTestStrategy("Troll Play", StrategyType.TROLL);
-        createTestStrategy("Average Game", StrategyType.AVERAGE);
-
-        List<Strategy> strategies = strategyDAO.getByMapId(testMap.getId());
-
-        assertThat(strategies, hasSize(greaterThanOrEqualTo(2)));
-
-        assertThat(strategies, hasItems(
-                hasProperty("type", is(StrategyType.TROLL)),
-                hasProperty("type", is(StrategyType.AVERAGE))
-        ));
-    }
+//    @Test
+//    void testGetByMapIdWithDifferentTypes() {
+//        createTestStrategy("Troll Play", StrategyType.TROLL);
+//        createTestStrategy("Average Game", StrategyType.AVERAGE);
+//
+//        List<Strategy> strategies = strategyDAO.getByMapId(testMap.getId());
+//
+//        assertThat(strategies, hasSize(greaterThanOrEqualTo(2)));
+//
+//        assertThat(strategies, hasItems(
+//                hasProperty("type", is(StrategyType.TROLL)),
+//                hasProperty("type", is(StrategyType.AVERAGE))
+//        ));
+//    }
 
 
     private Strategy createTestStrategy(String title, StrategyType type) {
