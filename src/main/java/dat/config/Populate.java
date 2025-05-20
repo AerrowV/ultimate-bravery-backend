@@ -29,10 +29,12 @@ public class Populate {
             testUser.addRole(userRole);
             em.persist(testUser);
 
-            Game game1 = new Game("Counter Strike");
+            Game game1 = new Game("Counter-Strike 2");
             Game game2 = new Game("League of Legends");
             Game game3 = new Game("Overwatch 2");
             em.persist(game1);
+            em.persist(game2);
+            em.persist(game3);
 
             Map ancient = new Map("Ancient", game1);
             Map anubis = new Map("Anubis", game1);
