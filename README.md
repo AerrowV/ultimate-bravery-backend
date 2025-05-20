@@ -1,18 +1,18 @@
-# 🧠 UltimateBravery - REST API
+# UltimateBravery - REST API
 
 **UltimateBravery** is a RESTful API built with Java, Javalin, and JPA that delivers randomized game strategies for competitive shooters like CS2 (Counter-Strike 2). It was developed as part of a semester project focusing on software design, security, and deployment best practices.
 
-## 📌 Features
+## Features
 
-- 🎮 Get randomized "Ultimate Bravery"-style strategies for selected games and maps
-- ✅ Categorize strategies by type: serious, average, or troll
-- 🔐 JWT-secured endpoints for user login and registration
-- 🗺️ Manage games, maps, guns, strategies, and more via RESTful routes
-- 🧪 Integration and unit testing using JUnit, Testcontainers, and RestAssured
-- 🚀 Dockerized for easy deployment (via GitHub Actions + DigitalOcean)
-- 🔐 HTTPS enabled with Caddy
+- Get randomized "Ultimate Bravery"-style strategies for selected games and maps
+- Categorize strategies by type: serious, average, or troll
+- JWT-secured endpoints for user login and registration
+- 🗺Manage games, maps, guns, strategies, and more via RESTful routes
+- Integration and unit testing using JUnit, Testcontainers, and RestAssured
+- Dockerized for easy deployment (via GitHub Actions + DigitalOcean)
+- HTTPS enabled with Caddy
 
-## ⚙️ Tech Stack
+## Tech Stack
 
 - **Java 17**
 - **Javalin** (REST API Framework)
@@ -24,7 +24,7 @@
 - **GitHub Actions** for CI/CD
 
 
-## 🚀 Running the API Locally
+## Running the API Locally
 
 1. **Clone the repo**:
    ```bash
@@ -45,7 +45,7 @@
 4. **Access the API**:
    Navigate to `http://localhost:7070/api`
 
-## 🔒 Authentication
+## Authentication
 
 Use `/auth/register` and `/auth/login` to get a JWT token. Add it to your headers for protected routes:
 
@@ -63,7 +63,7 @@ Authorization: Bearer <your_token_here>
 | GET    | `/api/games`         | Get all supported games          |
 | POST   | `/auth/login`        | Login and receive JWT            |
 
-## 🧪 Testing
+## Testing
 
 Tests are written with JUnit 5, RestAssured, and Testcontainers.
 
@@ -72,17 +72,7 @@ Run tests with:
 ```bash
 mvn test
 ```
-
-## 🐳 Docker
-
-Build and run the app via Docker:
-
-```bash
-docker build -t ultimatebravery-api .
-docker run -p 7070:7070 ultimatebravery-api
-```
-
-## 🌍 Deployment
+## Deployment
 
 The API is deployed using:
 
@@ -90,14 +80,7 @@ The API is deployed using:
 - Docker + DigitalOcean Droplet
 - Caddy for reverse proxy & HTTPS
 
-## 🤝 Contributing
+## Contributing
 
 Pull requests are welcome! Open an issue first to discuss major changes.
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
 ---
-
-Let me know if you want to add a Postman collection, API docs (like Swagger), or update with your real endpoint list and payload examples!
