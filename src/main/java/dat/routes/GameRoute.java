@@ -20,6 +20,7 @@ public class GameRoute {
             delete("/{id}", gameController::delete, Role.ADMIN);
             get("/map/{mapId}", gameController::getByMap);
             get("/gun/{gunId}", gameController::getByGun);
+            get("/{id}/strategies", gameController::getStrategiesByGameId);
         };
     }
 }

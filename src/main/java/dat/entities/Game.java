@@ -25,6 +25,9 @@ public class Game {
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL)
     private Set<Gun> guns = new HashSet<>();
 
+    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL)
+    private Set<Strategy> strategies = new HashSet<>();
+
     public Game() {
     }
 

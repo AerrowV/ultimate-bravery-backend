@@ -28,6 +28,11 @@ public class Strategy {
     @ManyToMany(mappedBy = "strategies", fetch = FetchType.EAGER)
     private Set<Map> maps = new HashSet<>();
 
+    @ManyToOne
+    @JoinColumn(name = "game_id")
+    private Game game;
+
+
     public Strategy() {
     }
 

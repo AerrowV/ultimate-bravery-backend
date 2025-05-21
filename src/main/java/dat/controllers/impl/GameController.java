@@ -5,8 +5,11 @@ import dat.config.Populate;
 import dat.controllers.IController;
 import dat.dao.impl.GameDAO;
 import dat.dtos.GameDTO;
+import dat.dtos.StrategyDTO;
 import dat.entities.Game;
+import dat.entities.Strategy;
 import dat.services.mappers.GameMapper;
+import dat.services.mappers.StrategyMapper;
 import io.javalin.http.Context;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -117,6 +120,26 @@ public class GameController implements IController<GameDTO, Long> {
             ctx.status(200).json(games.stream().map(GameMapper::toDTO).collect(Collectors.toList()));
         }
     }
+
+    public void getStrategiesByGameId(Context ctx) {
+        Long gameId = ctx.pathParamAsClass("id", Long.class)
+                .check(id -> id != null && id > 0, "Invalid game ID")
+                .get();
+
+        try (EntityManager em = emf.createEntityManager()) {
+            List<Strategy> strategies = em.createQuery(
+                            "SELECT s FROM Strategy s WHERE s.game.id = :gameId", Strategy.class)
+                    .setParameter("gameId", gameId)
+                    .getResultList();
+
+            List<StrategyDTO> strategyDTOs = strategies.stream()
+                    .map(StrategyMapper::toDTO)
+                    .collect(Collectors.toList());
+
+            ctx.status(200).json(strategyDTOs);
+        }
+    }
+
 
     public void populate(Context ctx) {
         Populate.populate(HibernateConfig.getEntityManagerFactory());
