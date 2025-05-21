@@ -46,9 +46,9 @@ public class SecurityDAO implements ISecurityDAO {
                 throw new EntityExistsException("User with username: " + username + " already exists");
             userEntity = new User(username, password);
             em.getTransaction().begin();
-            Role userRole = em.find(Role.class, "user");
+            Role userRole = em.find(Role.class, "USER");
             if (userRole == null)
-                userRole = new Role("user");
+                userRole = new Role("USER");
             em.persist(userRole);
             userEntity.addRole(userRole);
             em.persist(userEntity);

@@ -29,10 +29,7 @@ import java.text.ParseException;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/**
- * Purpose: To handle security in the API
- * Author: Thomas Hartmann
- */
+
 public class SecurityController implements ISecurityController {
     private static ISecurityDAO securityDAO;
     private static SecurityController instance;
