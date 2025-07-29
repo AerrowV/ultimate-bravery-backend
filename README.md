@@ -1,16 +1,28 @@
-# UltimateBravery - REST API
+# UltimateBravery – REST API
 
-**UltimateBravery** is a RESTful API built with Java, Javalin, and JPA that delivers randomized game strategies for competitive shooters like CS2 (Counter-Strike 2). It was developed as part of a semester project focusing on software design, security, and deployment best practices.
+**UltimateBravery** is a RESTful API built with Java, Javalin, and JPA that delivers randomized game strategies for competitive shooters like CS2 (Counter-Strike 2).  
+It was developed as part of a semester project focusing on software design, security, and deployment best practices.
+
+---
+
+**Frontend Repository**:  
+[github.com/AerrowV/ultimate-bravery-frontend](https://github.com/AerrowV/ultimate-bravery-frontend)
+
+**Live Demo**:  
+[https://ultimatebravery.yumiya.dk](https://ultimatebravery.yumiya.dk)
 
 ## Features
 
 - Get randomized "Ultimate Bravery"-style strategies for selected games and maps
 - Categorize strategies by type: serious, average, or troll
 - JWT-secured endpoints for user login and registration
+- Role-based access (USER / ADMIN)
 - Manage games, maps, guns, strategies, and more via RESTful routes
 - Integration and unit testing using JUnit, Testcontainers, and RestAssured
-- Dockerized for easy deployment (via GitHub Actions + DigitalOcean)
+- Dockerized for easy deployment (CI/CD with GitHub Actions + DigitalOcean)
 - HTTPS enabled with Caddy
+
+---
 
 ## Tech Stack
 
@@ -28,8 +40,8 @@
 
 1. **Clone the repo**:
    ```bash
-   git clone https://github.com/AerrowV/SP2_UltimateBravery.git
-   cd SP2_UltimateBravery
+   git clone https://github.com/AerrowV/ultimate-bravery-backend.git
+   cd ultimate-bravery-backend 
    ```
 
 2. **Build the project**:
@@ -44,14 +56,23 @@
 
 4. **Access the API**:
    Navigate to `http://localhost:7070/api`
-
+   
 ## Authentication
 
-Use `/auth/register` and `/auth/login` to get a JWT token. Add it to your headers for protected routes:
+Use the following endpoints to register or log in and receive a JWT token:
 
+- `POST /auth/register` – Create a new user
+- `POST /auth/login` – Log in and receive a token
+
+Include the token in the `Authorization` header for all protected routes:
 ```
 Authorization: Bearer <your_token_here>
 ```
+
+### Roles
+
+- `USER`: Can view and request random strategies
+- `ADMIN`: Can create, update, and delete strategies, games, maps, and more
 
 ## Example Endpoints
 
@@ -80,7 +101,4 @@ The API is deployed using:
 - Docker + DigitalOcean Droplet
 - Caddy for reverse proxy & HTTPS
 
-## Contributing
-
-Pull requests are welcome! Open an issue first to discuss major changes.
 ---
